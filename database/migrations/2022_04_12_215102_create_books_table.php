@@ -18,9 +18,9 @@ class CreateBooksTable extends Migration
             $table->string("name");
             $table->bigInteger("user_id")->unsigned()->index();
             $table->tinyInteger("is_admin")->comment("0: not Admin 1: admin")->default(0);
-            $table->string("full_name");
-            $table->text("description");
-            $table->integer("age");
+            $table->string("image")->nullable();
+            $table->integer("age_from");
+            $table->integer("age_to");
             $table->date("made_year");
             $table->bigInteger("category_id")->unsigned()->index();
 

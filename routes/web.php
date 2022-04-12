@@ -75,5 +75,8 @@ Route::group(['middleware' => 'auth:admin'], function () {
             Route::post("/edit/{id}","Admin\BookController@update")->name("update");
             Route::delete("/{id}","Admin\BookController@destroy")->name("destroy");
         });
+
+        Route::get("/sub-categories/by/main-category", "Ajax\MainCategoryController@index")->name("sub_categories.by_main_category");
+
     });
 });

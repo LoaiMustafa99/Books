@@ -17,9 +17,10 @@ class BookController extends Controller
     public function rules(){
         return [
             "name"          => ["required", "min:10", "max:255"],
-            "age"           => ["required", "min:10", "numeric"],
+            "age_from"           => ["required", "min:5", "numeric"],
+            "age_to"           => ["required", "min:10", "numeric"],
             "user_id"       => ["required"],
-            "category_id"   => ["required"],
+            "sub_category"   => ["required"],
             "description"   => ["required"],
             "made_year"     => ['required']
         ];
@@ -48,9 +49,10 @@ class BookController extends Controller
         $book =new book ;
         $book->is_admin = 1;
         $book->name = $request->name;
-        $book->age = $request->age;
+        $book->age_from = $request->age_from;
+        $book->age_to = $request->age_to;
         $book->user_id = $request->user_id;
-        $book->category_id = $request->category_id;
+        $book->category_id = $request->sub_category;
         $book->description = $request->description;
         $book->made_year = $request->made_year;
         $book->save();

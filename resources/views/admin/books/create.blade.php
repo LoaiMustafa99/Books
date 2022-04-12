@@ -38,15 +38,6 @@
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-group">
-                                    <label class="control-label">{{__("Age")}}</label>
-                                    <input class="form-control @if($errors->has('age')) is-invalid @endif" type="number" name="age" placeholder="{{__("Enter Age")}}">
-                                </div>
-                                @error("age")
-                                <div class="input-error">{{$message}}</div>
-                                @enderror
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="form-group">
                                     <label class="control-label">{{__("User")}}</label>
                                     <select class="form-control @if($errors->has('user_id')) is-invalid @endif" name="user_id" id="">
                                         <option value="">Select User</option>
@@ -61,8 +52,26 @@
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-group">
+                                    <label class="control-label">{{__("Age From")}}</label>
+                                    <input class="form-control @if($errors->has('age_from')) is-invalid @endif" type="number" name="age_from" placeholder="{{__("Enter Age From")}}">
+                                </div>
+                                @error("age_from")
+                                <div class="input-error">{{$message}}</div>
+                                @enderror
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label class="control-label">{{__("Age To")}}</label>
+                                    <input class="form-control @if($errors->has('age_to')) is-invalid @endif" type="number" name="age_to" placeholder="{{__("Enter Age To")}}">
+                                </div>
+                                @error("age_to")
+                                <div class="input-error">{{$message}}</div>
+                                @enderror
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
                                     <label class="control-label">{{__("Category")}}</label>
-                                    <select class="form-control @if($errors->has('category_id')) is-invalid @endif" name="category_id" id="">
+                                    <select class="form-control @if($errors->has('category_id')) is-invalid @endif" name="category_id" id="mainCategory" data-url="{{route("admin.sub_categories.by_main_category")}}">
                                         <option value="">Select Category</option>
                                         @foreach($categories as $category)
                                             <option value="{{$category->id}}">{{$category->name}}</option>
@@ -73,12 +82,13 @@
                                 <div class="input-error">{{$message}}</div>
                                 @enderror
                             </div>
-                            <div class="col-lg-6">
+                            <div class="col-lg-6" id="subCategoriesBox" style="@if(!$errors->has('sub_category')) display: none @endif">
                                 <div class="form-group">
-                                    <label class="control-label">{{__("Description")}}</label>
-                                    <textarea name="description" class="form-control @if($errors->has('description')) is-invalid @endif" placeholder="{{__("Enter Book Description")}}" cols="30" rows="10"></textarea>
+                                    <label for="exampleSelect1">{{__("Sub Category")}}</label>
+                                    <select class="form-control"  id="SubCategories" name="sub_category">
+                                    </select>
                                 </div>
-                                @error("description")
+                                @error("sub_category")
                                 <div class="input-error">{{$message}}</div>
                                 @enderror
                             </div>
@@ -88,6 +98,15 @@
                                     <input class="form-control @if($errors->has('made_year')) is-invalid @endif" type="date" name="made_year" placeholder="{{__("Enter Book Made Year")}}">
                                 </div>
                                 @error("made_year")
+                                <div class="input-error">{{$message}}</div>
+                                @enderror
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label class="control-label">{{__("Description")}}</label>
+                                    <textarea name="description" class="form-control @if($errors->has('description')) is-invalid @endif" placeholder="{{__("Enter Book Description")}}" cols="30" rows="10"></textarea>
+                                </div>
+                                @error("description")
                                 <div class="input-error">{{$message}}</div>
                                 @enderror
                             </div>
@@ -130,5 +149,6 @@
 
 @section("scripts")
 
+    <script src="{{asset("assets/js/pages/service.js")}}"></script>
 
 @endsection

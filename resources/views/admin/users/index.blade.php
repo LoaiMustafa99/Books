@@ -34,7 +34,6 @@
                                 <th>{{__("Full Name")}}</th>
                                 <th>{{__("Email")}}</th>
                                 <th>{{__("Age")}}</th>
-                                <th>{{__("Description")}}</th>
                                 <th>{{__("Birth Date")}}</th>
                                 <th>{{__("Created At")}}</th>
                                 <th>{{__("Control")}}</th>
@@ -47,7 +46,6 @@
                                     <td>{{$user->full_name}}</td>
                                     <td>{{$user->email}}</td>
                                     <td>{{$user->age}}</td>
-                                    <td>{{$user->description}}</td>
                                     <td>{{$user->birth_date}}</td>
                                     <td>{{$user->created_at->diffForHumans()}}</td>
                                     <td>

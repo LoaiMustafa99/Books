@@ -46,7 +46,7 @@
                                     <td>{{$book->id}}</td>
                                     <td>{{$book->name}}</td>
                                     <td>{{$book->description}}</td>
-                                    <td>{{$book->age}}</td>
+                                    <td>{{$book->age_from  . " - " . $book->age_to}}</td>
                                     <td>{{$book->made_year}}</td>
                                     <th>{{$book->category->name}}</th>
                                     <td>{{$book->created_at->diffForHumans()}}</td>

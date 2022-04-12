@@ -82,15 +82,6 @@
                                 <div class="input-error">{{$message}}</div>
                                 @enderror
                             </div>
-                            <div class="col-lg-6">
-                                <div class="form-group">
-                                    <label class="control-label">{{__("Description")}}</label>
-                                    <textarea  class="form-control @if($errors->has('description')) is-invalid @endif" name="description" placeholder="{{__("Enter Description")}}" cols="30" rows="10">{{$user->description}}</textarea>
-                                </div>
-                                @error("description")
-                                <div class="input-error">{{$message}}</div>
-                                @enderror
-                            </div>
                         </div>
                         <div class="tile-footer">
                             <button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i> {{__("Create")}}</button>

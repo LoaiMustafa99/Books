@@ -10,6 +10,6 @@ class Book extends Model
     protected $fillable = [];
 
     public function category(){
-        return $this->belongsTo(Category::class, "category_id");
+        return $this->belongsTo( SubCategory::class, "category_id");
     }
 }
