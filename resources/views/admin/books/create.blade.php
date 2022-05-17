@@ -94,7 +94,7 @@
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-group">
-                                    <label class="control-label">{{__("Made Year")}}</label>
+                                    <label class="control-label">{{__("Publishing year")}}</label>
                                     <input class="form-control @if($errors->has('made_year')) is-invalid @endif" type="date" name="made_year" placeholder="{{__("Enter Book Made Year")}}">
                                 </div>
                                 @error("made_year")

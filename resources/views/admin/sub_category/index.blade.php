@@ -2,6 +2,9 @@
 @section("page-title")
     {{__("Dashboard")}}
 @endSection
+@section("css-links")
+    <link rel="stylesheet" href="{{asset("assets/css/" . app()->getLocale() . "/pages/sub_categories.css")}}">
+@endsection
 @section("page-nav-title")
     <div class="app-title">
         <div>
@@ -10,7 +13,6 @@
         <ul class="app-breadcrumb breadcrumb">
             <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
             <li class="breadcrumb-item"><a href="#">{{__("Dashboard")}}</a></li>
-            <li class="breadcrumb-item"><a href="#">{{$main->name}}</a></li>
             <li class="breadcrumb-item"><a href="#">{{__("Sub Categories")}}</a></li>
         </ul>
     </div>
@@ -19,42 +21,36 @@
 @section("content")
     <div class="row mb-4">
         <div class="col-lg-12">
-            <a href="{{route("admin.sub_category.create", $main->id)}}" class="btn btn-primary">{{__("Create New Category")}}</a>
+
+            <a href="{{route("admin.sub_category.create",$urlParams)}}" class="btn btn-primary">{{__("Create New Sub Categroy")}}</a>
         </div>
     </div>
     <div class="row">
-        <div class="col-md-12">
-            <div class="tile">
-                <div class="tile-body">
-                    <div class="table-responsive">
-                        <table class="table table-hover table-bordered text-center" id="sampleTable">
-                            <thead>
-                            <tr>
-                                <th>{{__("ID")}}</th>
-                                <th>{{__("Name")}}</th>
-                                <th>{{__("Control")}}</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            @foreach($categories as $category)
-                                <tr>
-                                    <td>{{$category->id}}</td>
-                                    <td>{{$category->name}}</td>
-                                    <td>
-                                        <a href="{{route("admin.sub_category.edit", ["id" => $category->id, "main_id" => $main->id])}}" class="control-link edit"><i class="fas fa-edit"></i></a>
-                                        <form action="{{route("admin.sub_category.destroy", ["id" => $category->id, "main_id" => $main->id])}}" method="post" id="delete{{$category->id}}" style="display: none" data-swal-title="{{__("Delete Sub Category")}}" data-swal-text="{{__("Are You Sure To Delete This Sub Category?")}}" data-yes="{{__("Yes")}}" data-no="{{__("No")}}" data-success-msg="{{__("the Sub category has been deleted successfully")}}">@csrf @method("delete")</form>
-                                        <span href="#" class="control-link remove form-confirm" data-form-id="#delete{{$category->id}}"><i class="far fa-trash-alt"></i></span>
-                                    </td>
-                                </tr>
-                            @endforeach
-                            </tbody>
-                        </table>
-                    </div>
+        <div class="col-lg-12">
+            <div class="card categories-box">
+                <div class="card-header">
+                    <a href="{{route("admin.sub_category.index",["main_id" => $mainCategory->id])}}">{{$mainCategory->name}}</a> @if(isset($subCategory)) @include("admin.sub_category.parnets", ["sub" => $subCategory]) @endif
+                </div>
+                <div class="card-body">
+                    @if($subCategories !== Null)
+                        @foreach($subCategories as $sub)
+                            <div class="card-text category-box">
+                                <a href="{{(isset($subCategory) && $sub->level < $mainCategory->limit_levels_of_sub_categories) || (!isset($subCategory) &&  $mainCategory->limit_levels_of_sub_categories > 1)? route("admin.sub_categories.index", ["main_id" => $mainCategory->id, "parent_id" => $sub->id]) : "#"}}" class="box-link">
+                                    {{$sub->name}}
+                                </a>
+                                <div class="category-link">
+                                    @php $actionParams = $urlParams; $actionParams["id"] =  $sub->id; @endphp
+                                    <a href="{{route("admin.sub_category.edit", $actionParams)}}" class="btn btn-success">{{__("Edit")}}</a>
+                                    <form action="{{route("admin.sub_category.destroy", $actionParams)}}" method="post" id="delete{{$sub->id}}" style="display: none" data-swal-title="Delete Category" data-swal-text="{{__('Are Your Sure To Delete This Category ?')}}" data-yes="{{__('Yes')}}" data-no="{{__('No')}}" data-success-msg="{{__('the category has been deleted successfully')}}">@csrf @method("delete")</form>
+                                    <span href="#" class="btn btn-danger control-link form-confirm" style="font-size: 14px" data-form-id="#delete{{$sub->id}}">Delete</span>
+                                </div>
+                            </div>
+                        @endforeach
+                    @endif
                 </div>
             </div>
         </div>
     </div>
-
 @endsection
 
 @section("scripts")

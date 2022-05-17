@@ -38,9 +38,9 @@ class LoginController extends Controller
      */
     public function __construct()
     {
+        $this->middleware('guest:reader')->except('logout');
         $this->middleware('guest')->except('logout');
         $this->middleware('guest:admin')->except('logout');
-        $this->middleware('guest:reader')->except('logout');
     }
 
     public function showAdminLoginForm()
@@ -65,7 +65,7 @@ class LoginController extends Controller
 
     public function showBloggerLoginForm()
     {
-        return view('auth.login', ['url' => 'reader']);
+        return view('auth.login_reader', ['url' => 'reader']);
     }
 
     public function bloggerLogin(Request $request)
@@ -76,8 +76,7 @@ class LoginController extends Controller
 //        ]);
 
         if (Auth::guard('reader')->attempt(['email' => $request->email, 'password' => $request->password], $request->get('remember'))) {
-
-            return redirect()->route("admin.dashboard.index");
+            return redirect()->route("index");
         }
         return back()->withInput($request->only('email', 'remember'));
     }
@@ -87,7 +86,7 @@ class LoginController extends Controller
         $route = "";
         switch ($guard){
             case "reader":
-                $route .=  "/user/login";
+                $route .=  "/";
                 break;
             case "admin":
                 $route .=  "/admin/login";
@@ -110,6 +109,7 @@ class LoginController extends Controller
 
     public function logout(Request $request)
     {
+
         $guard = $this->getCurrentGuard();
 
         $this->guard($guard)->logout();
@@ -126,5 +126,10 @@ class LoginController extends Controller
         return $request->wantsJson()
             ? new \Illuminate\Http\JsonResponse([], 204)
             : redirect($this->redirectAfterLogout($guard));
+    }
+
+    protected function guard($name = null)
+    {
+        return Auth::guard($name);
     }
 }

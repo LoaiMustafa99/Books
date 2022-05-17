@@ -16,16 +16,16 @@ use Illuminate\Support\Facades\Route;
 */
 
 
+//Route::post("logout", "Auth\LoginController@logout")->name("logout");
 
 Route::get('/admin/login', 'Auth\LoginController@showAdminLoginForm')->name("login");
-Route::get('/user/login', 'Auth\LoginController@showBloggerLoginForm');
+Route::get('/user/login', 'Auth\LoginController@showBloggerLoginForm')->name("user.login");
 
 Route::post('/login/admin', 'Auth\LoginController@adminLogin');
 Route::post('/login/reader', 'Auth\LoginController@bloggerLogin');
 
 Route::group(['middleware' => 'auth:reader'], function () {
     Auth::routes();
-
     Route::prefix("/dashboard")->name("dashboard.")->group(function (){
         Route::get("/", "Admin\DashboardController@index")->name("index");
     });
@@ -78,5 +78,24 @@ Route::group(['middleware' => 'auth:admin'], function () {
 
         Route::get("/sub-categories/by/main-category", "Ajax\MainCategoryController@index")->name("sub_categories.by_main_category");
 
+    });
+});
+
+Route::get("/", "User\DashboardController@index")->name("index");
+
+Route::prefix("books")->name("books.")->group(function (){
+    Route::get("/", "User\BooksController@index")->name("index");
+});
+
+Route::prefix("post")->name("post.")->group(function (){
+    Route::get("/create", "user\PostController@create")->name("create");
+    Route::post("/store", "user\PostController@store")->name("store");
+    Route::get("/", "user\PostController@index")->name("index");
+    Route::get("/edit/{id}", "user\PostController@edit")->name("edit");
+    Route::put("/update/{id}", "user\PostController@update")->name("update");
+    Route::delete("/destroy/{id}", "user\PostController@destroy")->name("destroy");
+
+    Route::prefix("/comment")->name("comment.")->group(function (){
+        Route::post("/store", "Ajax\CommentController@save")->name("store");
     });
 });

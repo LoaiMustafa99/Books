@@ -23,7 +23,7 @@ class RedirectIfAuthenticated
         }
 
         if ($guard == "reader" && Auth::guard($guard)->check()) {
-            return redirect()->route("admin.dashboard.index");
+            return redirect()->route("index");
         }
 
         if (Auth::guard($guard)->check()) {

@@ -40,6 +40,10 @@
         "classmap": [
             "database/seeds",
             "database/factories"
+        ],
+        "files":[
+            "app/Helpers/Functions/forms.php",
+            "app/Helpers/Functions/main.php"
         ]
     },
     "autoload-dev": {

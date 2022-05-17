@@ -16,6 +16,7 @@ class CreateCategoryTable extends Migration
         Schema::create('category', function (Blueprint $table) {
             $table->id();
             $table->string("name");
+            $table->smallInteger("limit_levels_of_sub_categories");
             $table->timestamps();
         });
     }

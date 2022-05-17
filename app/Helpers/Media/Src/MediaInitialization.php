@@ -3,61 +3,82 @@ namespace App\Helpers\Media\Src;
 
 
 use App\Helpers\Media\Models\Media;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\File;
+
 
 trait MediaInitialization {
 
 
-    protected $uploadPath = 'uploads';
-    protected $urlPath = null;
+    protected ?string $uploadMainPath = null;
+    protected ?string $urlMainPath = null;
+    protected array $groups = [];
 
     public function __construct()
     {
-        $this->uploadPath = trim($this->setMediaSavedPath(), config("global.ds")) . config("global.ds");
-        $this->urlPath = str_replace("\\", "/", $this->uploadPath);
+        $mediaGroup = $this->setGroups();
+        foreach ($mediaGroup->getAllGroups() as $group){
+            $this->groups[$group->getName()] = ["path" => trim($group->getSavingPath(), "/"), "type" => $group->getType()];
+        }
+        $this->uploadMainPath = "uploads" . "/" . trim($this->setMainDirectoryPath(),  config("global.ds"));
+        $this->urlMainPath = trim(str_replace("\\", "/", $this->uploadMainPath), "/");
+        unset($mediaGroup);
     }
 
-    public function upload($file, $directoryPath){
+    public function setGroups() : MediaGroups{
+        return (new MediaGroups())
+            ->setGroup("single", "main","/");
+    }
+
+
+    public function upload($file, $directoryPath, $group){
         $imageName = time() . rand(0,100000000000) * 35 . "." . $file->getClientOriginalExtension();
         $file->move($directoryPath, $imageName);
+
         return $imageName;
     }
 
 
     public function files(){
-        if($this->setMediaRelationType() == 1)
-            return $this->morphOne(Media::class, 'mediaable', 'media_type', 'type_id');
-        else
-            return $this->morphMany(Media::class, 'mediaable', 'media_type', 'type_id');
+        return $this->morphMany(Media::class, 'mediaable', 'media_type', 'type_id');
     }
 
-    public function getMediaFiles(){
-        return $this->files;
+    public function getMediaFiles($group = "main"){
+        return $this->files($this->groups[$group]["type"])->where("group", $group)->get();
     }
 
-    public function getFirstMediaFile(){
-        if($this->setMediaRelationType() == 1)
-            return $this->files;
-        else{
-            if($this->files->isNotEmpty())
-                return $this->files[0];
+    public function getFirstMediaFile($group = "main"){
+        try {
+            if(!isset($this->groups[$group]))
+                throw new \Exception("the group is not found or the initialize it is incomplete.");
+
+            if($this->groups[$group]["type"] == 1)
+                return $this->files($this->groups[$group]["type"])->where("group", $group)->first();
             else
-                return null;
+                return $this->files($this->groups[$group]["type"])->where("group", $group)->get();
+
+        }catch (\Exception $e){
+            die($e->getMessage());
         }
     }
 
     /**
      * Store the uploaded file on a filesystem disk.
      *
-     * @param  \Illuminate\Http\UploadedFile  $path
+     * @param  UploadedFile  $file
      */
-    public function initizeMedia($file){
+    public function initizeMedia(UploadedFile $file, $group){
         try {
-            $uploadPath = $this->uploadPath . config("global.ds") . $this->id;
+            if(!isset($this->groups[$group]))
+                throw new \Exception("the group is not found or the initialize it is incomplete.s");
+            $groupPath = trim($this->groups[$group]["path"], config("global.ds"));
+
+            $uploadPath = $this->uploadMainPath . config("global.ds") .  $this->id . ($groupPath ? config("global.ds") . $groupPath : '') ;
             $media = new Media();
-            $filename = $this->upload($file, $uploadPath);
+            $filename = $this->upload($file, $uploadPath, $group);
             $media->filename = $filename;
-            $media->path = $this->urlPath. '/' . $this->id;
+            $media->group = $group;
+            $media->path = $this->urlMainPath. '/' . $this->id . ($groupPath ? '/' . $groupPath : '');
             return $media;
         }catch (\Exception $e){
             die($e->getMessage());
@@ -68,21 +89,21 @@ trait MediaInitialization {
     /**
      * Store the uploaded file on a filesystem disk.
      *
-     * @param  \Illuminate\Http\UploadedFile  $path
+     * @param  UploadedFile  $path
      */
-    public function saveMedia(\Illuminate\Http\UploadedFile $file){
-        $media = $this->initizeMedia($file);
-        return $this->files()->save($media);
+    public function saveMedia(UploadedFile $file, $group = "main"){
+        $media = $this->initizeMedia($file, $group);
+        return $this->files($this->groups[$group]["type"])->save($media);
     }
 
-    public function removeFiles($files){
-        if($files instanceof \Illuminate\Database\Eloquent\Collection){
-            foreach ($files as $file){
+    public function removeMedia($media){
+        if($media instanceof \Illuminate\Database\Eloquent\Collection){
+            foreach ($media as $file){
                 File::delete($file->path . config("global.ds") . $file->filename);
                 $file->delete();
             }
         }else{
-            $file = $files;
+            $file = $media;
             File::delete($file->path . config("global.ds") . $file->filename);
             $file->delete();
         }
@@ -101,15 +122,16 @@ trait MediaInitialization {
         return false;
     }
 
-    public function removeHisDirectory() : bool{
-        if($this->files){
-            if($this->files instanceof \Illuminate\Database\Eloquent\Collection){
-                foreach ($this->files as $file)
+    public function removeAllGroupFiles($group) : bool{
+        $files = $this->files()->where("group", $group)->get();
+        if($files->isNotEmpty()){
+            if($files instanceof \Illuminate\Database\Eloquent\Collection){
+                foreach ($files as $file)
                     $file->delete();
             }else
                 $this->files->delete();
 
-            return $this->removeDir($this->setMediaSavedPath() . config("global.ds") . $this->id);
+            return $this->removeDir($this->uploadMainPath . config("global.ds") . $this->id . "/" . $this->groups[$group]["path"]);
         }
         return false;
     }

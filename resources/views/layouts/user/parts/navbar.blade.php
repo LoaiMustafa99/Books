@@ -1,21 +1,32 @@
-<header class="app-header">
-    <a class="app-header__logo" href="{{ route("dashboard.index") }}">
-        <img src="{{asset("assets/logo_text.png")}}" alt="" class="site-logo"></a>
-    <!-- Sidebar toggle button--><a class="app-sidebar__toggle" href="#" data-toggle="sidebar" aria-label="Hide Sidebar"><i class="fas fa-bars"></i></a>
-    <!-- Navbar Right Menu-->
-    <ul class="app-nav">
-        <!-- User Menu-->
-        <li class="dropdown"><a class="app-nav__item" href="#" data-toggle="dropdown" aria-label="{{__("Open Profile Menu")}}"><i class="fa fa-user fa-lg"></i></a>
-            <ul class="dropdown-menu settings-menu dropdown-menu-right">
-                <li><a class="dropdown-item" href="#"><i class="fa fa-user fa-lg"></i> Profile</a></li>
+<nav class="navbar navbar-expand-lg navbar-light bg-light" style="direction: ltr; background-color:#546a7b !important;">
+    <a class="navbar-brand" href="#" style="color:blanchedalmond!important;"><span style="color:#fff"> opinion</span> top</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
 
-                <li><a class="dropdown-item" href="#" onclick="event.preventDefault();
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link col-item" href="/">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link col-item" href="#">Contact</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link col-item" href="{{route("post.create")}}">Add Post</a>
+            </li>
+        </ul>
+        @if(!\Illuminate\Support\Facades\Auth::guard("reader")->check())
+        <form class="form-inline my-2 my-lg-0" method="get" action="{{route("user.login")}}">
+            <button class="btn col-bt-sign my-2 my-sm-0" type="submit">sign in</button>
+        </form>
+        @else
+            <a class="btn col-bt-sign my-2 my-sm-0" href="{{route("logout")}}" onclick="event.preventDefault();
                      document.getElementById('logout-form').submit();"><i class="fa fa-sign-out fa-lg"></i>{{__("Logout")}}</a>
-                </li>
-                <form id="logout-form" action="{{ route('user.auth.logout') }}" method="POST" class="d-none">
-                    @csrf
-                </form>
-            </ul>
-        </li>
-    </ul>
-</header>
+
+            <form id="logout-form" action="{{route("logout")}}" method="POST" class="d-none">
+                @csrf
+            </form>
+        @endif
+    </div>
+</nav>

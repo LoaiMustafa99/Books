@@ -32,25 +32,27 @@
                             <tr>
                                 <th>{{__("ID")}}</th>
                                 <th>{{__("Name")}}</th>
+                                <th>{{__("Levels Of Sub Categories")}}</th>
                                 <th>{{__("Sub Category")}}</th>
                                 <th>{{__("Control")}}</th>
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($categories as $category)
-                                <tr>
-                                    <td>{{$category->id}}</td>
-                                    <td>{{$category->name}}</td>
-                                    <td>
-                                        <a href="{{route("admin.sub_category.index", $category->id)}}" class="btn btn-primary">{{__("View")}}</a>
-                                    </td>
-                                    <td>
-                                        <a href="{{route("admin.category.edit", $category->id)}}" class="control-link edit"><i class="fas fa-edit"></i></a>
-                                        <form action="{{route("admin.category.destroy", $category->id)}}" method="post" id="delete{{$category->id}}" style="display: none" data-swal-title="{{__("Delete Category")}}" data-swal-text="{{__("Are You Sure To Delete This Category?")}}" data-yes="{{__("Yes")}}"" data-no="{{__("No")}}"" data-success-msg="{{__("the category has been deleted succssfully")}}">@csrf @method("delete")</form>
-                                        <span href="#" class="control-link remove form-confirm" data-form-id="#delete{{$category->id}}"><i class="far fa-trash-alt"></i></span>
-                                    </td>
-                                </tr>
-                            @endforeach
+                                @foreach($categories as $category)
+                                    <tr>
+                                        <td>{{$category->id}}</td>
+                                        <td>{{$category->name}}</td>
+                                        <td>{{$category->limit_levels_of_sub_categories}}</td>
+                                        <td>
+                                            <a href="{{route("admin.sub_category.index", $category->id)}}" class="btn btn-primary">{{__("View")}}</a>
+                                        </td>
+                                        <td>
+                                            <a href="{{route("admin.category.edit", $category->id)}}" class="control-link edit"><i class="fas fa-edit"></i></a>
+                                            <form action="{{route("admin.category.destroy", $category->id)}}" method="post" id="delete{{$category->id}}" style="display: none" data-swal-title="{{__("Delete Category")}}" data-swal-text="{{__("Are You Sure To Delete This Category?")}}" data-yes="{{__("Yes")}}"" data-no="{{__("No")}}"" data-success-msg="{{__("the category has been deleted succssfully")}}">@csrf @method("delete")</form>
+                                            <span href="#" class="control-link remove form-confirm" data-form-id="#delete{{$category->id}}"><i class="far fa-trash-alt"></i></span>
+                                        </td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>

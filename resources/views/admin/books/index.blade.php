@@ -35,7 +35,7 @@
                                 <th>{{__("Description")}}</th>
                                 <th>{{__("Age")}}</th>
                                 <th>{{__("Made Year")}}</th>
-                                <th>{{__("Name Category")}}</th>
+{{--                                <th>{{__("Name Category")}}</th>--}}
                                 <th>{{__("Created At")}}</th>
                                 <th>{{__("Control")}}</th>
                             </tr>
@@ -48,7 +48,7 @@
                                     <td>{{$book->description}}</td>
                                     <td>{{$book->age_from  . " - " . $book->age_to}}</td>
                                     <td>{{$book->made_year}}</td>
-                                    <th>{{$book->category->name}}</th>
+{{--                                    <th>{{$book->category->name}}</th>--}}
                                     <td>{{$book->created_at->diffForHumans()}}</td>
                                     <td>
                                         <a href="{{route("admin.books.edit", $book->id)}}" class="control-link edit"><i class="fas fa-edit"></i></a>
