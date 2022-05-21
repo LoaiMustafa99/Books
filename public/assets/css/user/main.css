@@ -1125,7 +1125,7 @@ input, button {border: none;outline: none;background: none;font-family: "Open Sa
     top: 0;
     width: 900px;
     height: 100%;
-    background-image: url("../../images/p2.jpg");
+    background-image: url("http://127.0.0.1:8000/images/p2.jpg");
     background-size: inherit;
     transition: transform 1.2s ease-in-out;
 }

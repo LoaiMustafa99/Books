@@ -21,10 +21,10 @@
             <button class="btn col-bt-sign my-2 my-sm-0" type="submit">sign in</button>
         </form>
         @else
-            <a class="btn col-bt-sign my-2 my-sm-0" href="{{route("logout")}}" onclick="event.preventDefault();
+            <a class="btn col-bt-sign my-2 my-sm-0" href="{{route("user.logout")}}" onclick="event.preventDefault();
                      document.getElementById('logout-form').submit();"><i class="fa fa-sign-out fa-lg"></i>{{__("Logout")}}</a>
 
-            <form id="logout-form" action="{{route("logout")}}" method="POST" class="d-none">
+            <form id="logout-form" action="{{route("user.logout")}}" method="POST" class="d-none">
                 @csrf
             </form>
         @endif

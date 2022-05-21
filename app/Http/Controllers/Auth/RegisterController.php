@@ -39,6 +39,7 @@ class RegisterController extends Controller
     public function __construct()
     {
         $this->middleware('guest');
+        $this->middleware('guest:reader');
     }
 
     /**
@@ -70,4 +71,10 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
         ]);
     }
+
+    public function showRegisterForm()
+    {
+        return view('auth.register');
+    }
+
 }

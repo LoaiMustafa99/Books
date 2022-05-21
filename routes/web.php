@@ -16,7 +16,12 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-//Route::post("logout", "Auth\LoginController@logout")->name("logout");
+
+Route::get('/register/user', 'Auth\RegisterController@showRegisterForm')->name("register.user");
+
+Route::post('/register/user', 'Auth\RegisterController@createUser')->name("register.user.save");
+
+Route::post("user/logout", "Auth\LoginController@logout")->name("user.logout");
 
 Route::get('/admin/login', 'Auth\LoginController@showAdminLoginForm')->name("login");
 Route::get('/user/login', 'Auth\LoginController@showBloggerLoginForm')->name("user.login");

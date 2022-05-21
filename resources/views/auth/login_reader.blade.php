@@ -26,7 +26,7 @@
                         <div class="img__text">
                             <h2 class="logo-opinion"><span> opinion</span> top</h2>
                             <p>If you do not have an account</p>
-                            <a href="signup.html" class="sign-btn">sign up</a>
+                            <a href="{{route("register.user")}}" class="sign-btn">sign up</a>
                         </div>
                     </div>
                  </div>
