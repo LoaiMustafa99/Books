@@ -32,8 +32,8 @@
                             <tr>
                                 <th>{{__("ID")}}</th>
                                 <th>{{__("Full Name")}}</th>
+                                <th>{{__("Image")}}</th>
                                 <th>{{__("Email")}}</th>
-                                <th>{{__("Age")}}</th>
                                 <th>{{__("Birth Date")}}</th>
                                 <th>{{__("Created At")}}</th>
                                 <th>{{__("Control")}}</th>
@@ -44,8 +44,8 @@
                                 <tr>
                                     <td>{{$user->id}}</td>
                                     <td>{{$user->full_name}}</td>
+                                    <td><img src="{{$user->getFirstMediaFile("profile_photo") ? $user->getFirstMediaFile("profile_photo")->url : $user->defaultUserPhoto()}}" width="80"></td>
                                     <td>{{$user->email}}</td>
-                                    <td>{{$user->age}}</td>
                                     <td>{{$user->birth_date}}</td>
                                     <td>{{$user->created_at->diffForHumans()}}</td>
                                     <td>

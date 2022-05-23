@@ -21,10 +21,6 @@
                 <input type="date" name="email" />
             </label>
             <label>
-                <span>age</span>
-                <input type="number" name="email" />
-            </label>
-            <label>
                 <span>password</span>
                 <input type="password" name="password" />
             </label>

@@ -38,15 +38,10 @@
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-group">
-                                    <label class="control-label">{{__("User")}}</label>
-                                    <select class="form-control @if($errors->has('user_id')) is-invalid @endif" name="user_id" id="">
-                                        <option value="">Select User</option>
-                                        @foreach($users as $user)
-                                            <option value="{{$user->id}}">{{$user->full_name}}</option>
-                                        @endforeach
-                                    </select>
+                                    <label class="control-label">{{__("Publishing year")}}</label>
+                                    <input class="form-control @if($errors->has('publishing_year')) is-invalid @endif" type="date" name="publishing_year" placeholder="{{__("Enter Book Publishing Year")}}">
                                 </div>
-                                @error("user_id")
+                                @error("publishing_year")
                                 <div class="input-error">{{$message}}</div>
                                 @enderror
                             </div>
@@ -70,37 +65,30 @@
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-group">
-                                    <label class="control-label">{{__("Category")}}</label>
-                                    <select class="form-control @if($errors->has('category_id')) is-invalid @endif" name="category_id" id="mainCategory" data-url="{{route("admin.sub_categories.by_main_category")}}">
-                                        <option value="">Select Category</option>
+                                    <label for="exampleSelect1">{{__("Main Category")}}</label>
+                                    <select class="form-control" id="mainCategory" name="main_category" data-url="{{route("admin.sub_categories.by_main_category")}}">
+                                        <option value="">{{__("none")}}</option>
                                         @foreach($categories as $category)
-                                            <option value="{{$category->id}}">{{$category->name}}</option>
+                                            <option value="{{$category->id}}" >{{$category->name}}</option>
                                         @endforeach
                                     </select>
                                 </div>
-                                @error("category_id")
+                                @error("main_category")
                                 <div class="input-error">{{$message}}</div>
                                 @enderror
                             </div>
                             <div class="col-lg-6" id="subCategoriesBox" style="@if(!$errors->has('sub_category')) display: none @endif">
                                 <div class="form-group">
                                     <label for="exampleSelect1">{{__("Sub Category")}}</label>
-                                    <select class="form-control"  id="SubCategories" name="sub_category">
+                                    <select class="form-control"  data-url="{{route("admin.sub_categories.by_sub_category")}}" id="SubCategories" name="category_id" >
                                     </select>
                                 </div>
-                                @error("sub_category")
+                                @error("category_id")
                                 <div class="input-error">{{$message}}</div>
                                 @enderror
                             </div>
-                            <div class="col-lg-6">
-                                <div class="form-group">
-                                    <label class="control-label">{{__("Publishing year")}}</label>
-                                    <input class="form-control @if($errors->has('made_year')) is-invalid @endif" type="date" name="made_year" placeholder="{{__("Enter Book Made Year")}}">
-                                </div>
-                                @error("made_year")
-                                <div class="input-error">{{$message}}</div>
-                                @enderror
-                            </div>
+                        </div>
+                        <div class="row">
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label class="control-label">{{__("Description")}}</label>
@@ -111,31 +99,29 @@
                                 @enderror
                             </div>
                         </div>
-
-                        {{--                        <hr>--}}
-
-                        {{--                        <div class="row">--}}
-                        {{--                            <div class="col-lg-6">--}}
-                        {{--                                <div class="form-group">--}}
-                        {{--                                    <label class="control-label">{{__("Main Category Photo")}}</label>--}}
-                        {{--                                    <div>--}}
-                        {{--                                        <button class="btn btn-primary form-control button-upload-file" >--}}
-                        {{--                                            <input class="input-file show-uploaded" data-upload-type="single" data-imgs-container-class="uploaded-images" type="file" name="main_category_photo">--}}
-                        {{--                                            <span class="upload-file-content">--}}
-                        {{--                                                <i class="fas fa-upload fa-lg upload-file-content-icon left"></i>--}}
-                        {{--                                                <span class="upload-file-content-text">{{__("Upload Photo")}}</span>--}}
-                        {{--                                            </span>--}}
-                        {{--                                        </button>--}}
-                        {{--                                    </div>--}}
-                        {{--                                </div>--}}
-                        {{--                                @error("main_category_photo")--}}
-                        {{--                                <div class="input-error">{{$message}}</div>--}}
-                        {{--                                @enderror--}}
-                        {{--                            </div>--}}
-                        {{--                            <div class="col-lg-3 col-md-5 col-sm-6">--}}
-                        {{--                                <div class="uploaded-images"></div>--}}
-                        {{--                            </div>--}}
-                        {{--                        </div>--}}
+                        <hr>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label class="control-label">{{__("Book Photo")}}</label>
+                                    <div>
+                                        <button class="btn btn-primary form-control button-upload-file" >
+                                            <input class="input-file show-uploaded" data-upload-type="single" data-imgs-container-class="uploaded-images" type="file" name="book_photo">
+                                            <span class="upload-file-content">
+                                                <i class="fas fa-upload fa-lg upload-file-content-icon left"></i>
+                                                <span class="upload-file-content-text">{{__("Upload Photo")}}</span>
+                                            </span>
+                                        </button>
+                                    </div>
+                                </div>
+                                @error("book_photo")
+                                <div class="input-error">{{$message}}</div>
+                                @enderror
+                            </div>
+                            <div class="col-lg-3 col-md-5 col-sm-6">
+                                <div class="uploaded-images"></div>
+                            </div>
+                        </div>
                         <div class="tile-footer">
                             <button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i> {{__("Create")}}</button>
                         </div>

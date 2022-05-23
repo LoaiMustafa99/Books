@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.0.3
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 23, 2022 at 03:56 PM
--- Server version: 10.4.22-MariaDB
--- PHP Version: 7.4.27
+-- Generation Time: May 23, 2022 at 11:35 PM
+-- Server version: 10.4.14-MariaDB
+-- PHP Version: 7.4.11
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -55,17 +55,21 @@ INSERT INTO `admin` (`id`, `full_name`, `username`, `email`, `email_verified_at`
 CREATE TABLE `book` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `user_id` bigint(20) UNSIGNED NOT NULL,
-  `is_admin` tinyint(4) NOT NULL DEFAULT 0 COMMENT '0: not Admin 1: admin',
-  `image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `description` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `age_from` int(11) NOT NULL,
   `age_to` int(11) NOT NULL,
-  `made_year` date NOT NULL,
+  `publishing_year` date NOT NULL,
   `category_id` bigint(20) UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `book`
+--
+
+INSERT INTO `book` (`id`, `name`, `description`, `age_from`, `age_to`, `publishing_year`, `category_id`, `created_at`, `updated_at`) VALUES
+(4, 'The Atlas Six by Olivie Blake', 'Why You’ll Love It: After becoming a BookTok sensation in the summer of 2021, The Atlas Six is getting a newly revised hardcover rerelease to hype everyone up for the arrival of its sequel The Atlas Paradox later this year. And if you missed the memo on this story the first time now is your chance to catch up. Blake’s novel has a little bit of everything: dark academia vibes, hot magicians, secret societies, a twisty plot, and an array of diverse, intriguing characters at its center. Get in on it now before the already commissioned Amazon series arrives. \r\nPublisher’s Description: The Alexandrian Society is a secret society of magical academicians, the best in the world. Their members are caretakers of lost knowledge from the greatest civilizations of antiquity. And those who earn a place among their number will secure a life of wealth, power, and prestige beyond their wildest dreams. Each decade, the world’s six most uniquely talented magicians are selected for initiation – and here are the chosen few…\r\n- Libby Rhodes and Nicolás Ferrer de Varona: inseparable enemies, cosmologists who can control matter with their minds.\r\n- Reina Mori: a naturalist who can speak the language of life itself.\r\n- Parisa Kamali: a mind reader whose powers of seduction are unmatched.\r\n- Tristan Caine: the son of a crime kingpin who can see the secrets of the universe.\r\n- Callum Nova: an insanely rich pretty boy who could bring about the end of the world. He need only ask.\r\nWhen the candidates are recruited by the mysterious Atlas Blakely, they are told they must spend one year together to qualify for initiation. During this time, they will be permitted access to the Society’s archives and judged on their contributions to arcane areas of knowledge. Five, they are told, will be initiated. One will be eliminated. If they can prove themselves to be the best, they will survive. Most of them.', 10, 25, '2021-01-23', 21, '2022-05-23 13:26:23', '2022-05-23 13:26:23');
 
 -- --------------------------------------------------------
 
@@ -87,9 +91,10 @@ CREATE TABLE `category` (
 --
 
 INSERT INTO `category` (`id`, `name`, `limit_levels_of_sub_categories`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'Ram 17GBtrhrft', 2, 0, '2022-03-12 21:56:47', '2022-05-23 10:41:11'),
+(1, 'Ram 17GBtrhrft', 2, 1, '2022-03-12 21:56:47', '2022-05-23 12:23:10'),
 (2, 'Eman', 1, 0, '2022-03-18 14:33:44', '2022-03-18 14:33:44'),
-(4, 'Read Book', 1, 0, '2022-03-18 14:35:13', '2022-04-11 18:52:41');
+(4, 'Read Book', 1, 0, '2022-03-18 14:35:13', '2022-04-11 18:52:41'),
+(10, 'Art', 2, 1, '2022-05-23 18:23:42', '2022-05-23 18:25:12');
 
 -- --------------------------------------------------------
 
@@ -155,7 +160,8 @@ INSERT INTO `media` (`id`, `filename`, `path`, `group`, `media_type`, `type_id`,
 (2, '16528136091094422681835.png', 'uploads/posts/2', 'main', 'App\\Models\\Post', 2, '2022-05-17 15:53:29', '2022-05-17 15:53:29'),
 (3, '16528151921475524391740.jpg', 'uploads/posts/3', 'main', 'App\\Models\\Post', 3, '2022-05-17 16:19:52', '2022-05-17 16:19:52'),
 (6, '16528211511722652037820.jpg', 'uploads/posts/1', 'main', 'App\\Models\\Post', 1, '2022-05-17 17:59:11', '2022-05-17 17:59:11'),
-(7, '1652823405401722078555.png', 'uploads/posts/6', 'main', 'App\\Models\\Post', 6, '2022-05-17 18:36:45', '2022-05-17 18:36:45');
+(7, '1652823405401722078555.png', 'uploads/posts/6', 'main', 'App\\Models\\Post', 6, '2022-05-17 18:36:45', '2022-05-17 18:36:45'),
+(12, '16533231833294138552250.png', 'uploads/book/4', 'main', 'App\\Models\\Book', 4, '2022-05-23 13:26:23', '2022-05-23 13:26:23');
 
 -- --------------------------------------------------------
 
@@ -261,48 +267,6 @@ CREATE TABLE `rating` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `reed_book`
---
-
-CREATE TABLE `reed_book` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `user_id` bigint(20) UNSIGNED NOT NULL,
-  `book_id` bigint(20) UNSIGNED NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `reed_book_finsh`
---
-
-CREATE TABLE `reed_book_finsh` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `user_id` bigint(20) UNSIGNED NOT NULL,
-  `book_id` bigint(20) UNSIGNED NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `reed_book_now`
---
-
-CREATE TABLE `reed_book_now` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `user_id` bigint(20) UNSIGNED NOT NULL,
-  `book_id` bigint(20) UNSIGNED NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `sub_categories`
 --
 
@@ -315,6 +279,19 @@ CREATE TABLE `sub_categories` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `sub_categories`
+--
+
+INSERT INTO `sub_categories` (`id`, `name`, `main_id`, `level`, `parent_id`, `created_at`, `updated_at`) VALUES
+(20, 'Test', 1, 1, NULL, '2022-05-23 12:23:03', '2022-05-23 16:30:23'),
+(21, 'Loai', 1, 2, 20, '2022-05-23 12:23:10', '2022-05-23 12:23:10'),
+(22, 'Ram 17GB', 1, 2, 20, '2022-05-23 18:03:56', '2022-05-23 18:03:56'),
+(23, 'Malle', 1, 2, 20, '2022-05-23 18:04:01', '2022-05-23 18:04:01'),
+(24, 'رعب', 10, 1, NULL, '2022-05-23 18:24:07', '2022-05-23 18:24:07'),
+(25, 'درامى', 10, 1, NULL, '2022-05-23 18:24:30', '2022-05-23 18:24:45'),
+(26, 'دراما', 10, 2, 24, '2022-05-23 18:25:11', '2022-05-23 18:25:34');
 
 -- --------------------------------------------------------
 
@@ -329,7 +306,6 @@ CREATE TABLE `users` (
   `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
   `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `age` int(11) NOT NULL,
   `birth_date` date NOT NULL,
   `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -340,8 +316,8 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `full_name`, `username`, `email`, `email_verified_at`, `password`, `age`, `birth_date`, `remember_token`, `created_at`, `updated_at`) VALUES
-(2, 'Eman2', 'Eman2', 'Eman@gmail.com', NULL, '$2y$10$ZIMNOpLHJJMOFYX/vjAajO3/rBOxvIrAUCLYd1quwAGJmhC8M4BiS', 1234, '2022-03-13', NULL, '2022-03-29 18:43:52', '2022-03-29 18:43:52');
+INSERT INTO `users` (`id`, `full_name`, `username`, `email`, `email_verified_at`, `password`, `birth_date`, `remember_token`, `created_at`, `updated_at`) VALUES
+(2, 'Eman2', 'Eman2', 'Eman@gmail.com', NULL, '$2y$10$ZIMNOpLHJJMOFYX/vjAajO3/rBOxvIrAUCLYd1quwAGJmhC8M4BiS', '2022-03-13', NULL, '2022-03-29 18:43:52', '2022-03-29 18:43:52');
 
 --
 -- Indexes for dumped tables
@@ -359,7 +335,6 @@ ALTER TABLE `admin`
 --
 ALTER TABLE `book`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `book_user_id_index` (`user_id`),
   ADD KEY `book_category_id_index` (`category_id`);
 
 --
@@ -424,30 +399,6 @@ ALTER TABLE `rating`
   ADD KEY `rating_book_id_index` (`book_id`);
 
 --
--- Indexes for table `reed_book`
---
-ALTER TABLE `reed_book`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `reed_book_user_id_index` (`user_id`),
-  ADD KEY `reed_book_book_id_index` (`book_id`);
-
---
--- Indexes for table `reed_book_finsh`
---
-ALTER TABLE `reed_book_finsh`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `reed_book_finsh_user_id_index` (`user_id`),
-  ADD KEY `reed_book_finsh_book_id_index` (`book_id`);
-
---
--- Indexes for table `reed_book_now`
---
-ALTER TABLE `reed_book_now`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `reed_book_now_user_id_index` (`user_id`),
-  ADD KEY `reed_book_now_book_id_index` (`book_id`);
-
---
 -- Indexes for table `sub_categories`
 --
 ALTER TABLE `sub_categories`
@@ -476,13 +427,13 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `book`
 --
 ALTER TABLE `book`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `comments`
@@ -500,7 +451,7 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `media`
 --
 ALTER TABLE `media`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `migrations`
@@ -527,28 +478,10 @@ ALTER TABLE `rating`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `reed_book`
---
-ALTER TABLE `reed_book`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `reed_book_finsh`
---
-ALTER TABLE `reed_book_finsh`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `reed_book_now`
---
-ALTER TABLE `reed_book_now`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT for table `sub_categories`
 --
 ALTER TABLE `sub_categories`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `users`
@@ -564,8 +497,7 @@ ALTER TABLE `users`
 -- Constraints for table `book`
 --
 ALTER TABLE `book`
-  ADD CONSTRAINT `book_category_id_foreign` FOREIGN KEY (`category_id`) REFERENCES `sub_categories` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `book_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `book_category_id_foreign` FOREIGN KEY (`category_id`) REFERENCES `sub_categories` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `comments`
@@ -586,27 +518,6 @@ ALTER TABLE `posts`
 ALTER TABLE `rating`
   ADD CONSTRAINT `rating_book_id_foreign` FOREIGN KEY (`book_id`) REFERENCES `book` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `rating_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `reed_book`
---
-ALTER TABLE `reed_book`
-  ADD CONSTRAINT `reed_book_book_id_foreign` FOREIGN KEY (`book_id`) REFERENCES `book` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `reed_book_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `reed_book_finsh`
---
-ALTER TABLE `reed_book_finsh`
-  ADD CONSTRAINT `reed_book_finsh_book_id_foreign` FOREIGN KEY (`book_id`) REFERENCES `book` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `reed_book_finsh_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `reed_book_now`
---
-ALTER TABLE `reed_book_now`
-  ADD CONSTRAINT `reed_book_now_book_id_foreign` FOREIGN KEY (`book_id`) REFERENCES `book` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `reed_book_now_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `sub_categories`

@@ -27,14 +27,13 @@
                 <div class="tile-body">
                     <form method="post" action="{{route("admin.sub_category.update", $urlParams + ["id" => $category->id])}}" enctype="multipart/form-data">
                         @csrf
-                        @method("put")
                         <div class="row">
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label class="control-label">{{__("English Sub Category Name")}}</label>
-                                    <input class="form-control @if($errors->has('name')) is-invalid @endif" type="text" name="name_en" placeholder="{{__("Enter English Main Category Name")}}" value="{{inputValue("name", $category)}}">
+                                    <input class="form-control @if($errors->has('name')) is-invalid @endif" type="text" name="name" placeholder="{{__("Enter English Main Category Name")}}" value="{{inputValue("name", $category)}}">
                                 </div>
-                                @error("name_en")
+                                @error("name")
                                 <div class="input-error">{{$message}}</div>
                                 @enderror
                             </div>

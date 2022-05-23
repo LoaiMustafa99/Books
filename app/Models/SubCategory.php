@@ -29,4 +29,5 @@ class SubCategory extends Model
         return self::where([["main_id", $mainCategoryId],["parent_id" ,null]])->get();
     }
 
+
 }

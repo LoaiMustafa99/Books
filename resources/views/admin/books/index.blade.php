@@ -32,10 +32,11 @@
                             <tr>
                                 <th>{{__("ID")}}</th>
                                 <th>{{__("Name")}}</th>
+                                <th>{{__("Image")}}</th>
                                 <th>{{__("Description")}}</th>
                                 <th>{{__("Age")}}</th>
-                                <th>{{__("Made Year")}}</th>
-{{--                                <th>{{__("Name Category")}}</th>--}}
+                                <th>{{__("Publishing Year")}}</th>
+                                <th>{{__("Name Category")}}</th>
                                 <th>{{__("Created At")}}</th>
                                 <th>{{__("Control")}}</th>
                             </tr>
@@ -45,10 +46,30 @@
                                 <tr>
                                     <td>{{$book->id}}</td>
                                     <td>{{$book->name}}</td>
-                                    <td>{{$book->description}}</td>
+                                    <td><img src="{{$book->getFirstMediaFile() ? $book->getFirstMediaFile()->url : Null}}" width="80"></td>
+                                    <td>
+                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#description{{$book->id}}">
+                                            {{__("View")}}
+                                        </button>
+                                        <div class="modal fade" id="description{{$book->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog modal-xl">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLabel">Location</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        {{$book->description}}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
                                     <td>{{$book->age_from  . " - " . $book->age_to}}</td>
-                                    <td>{{$book->made_year}}</td>
-{{--                                    <th>{{$book->category->name}}</th>--}}
+                                    <td>{{$book->publishing_year}}</td>
+                                    <th>{{$book->getFullNameAttribute()}}</th>
                                     <td>{{$book->created_at->diffForHumans()}}</td>
                                     <td>
                                         <a href="{{route("admin.books.edit", $book->id)}}" class="control-link edit"><i class="fas fa-edit"></i></a>

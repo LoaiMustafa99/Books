@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 
 use App\Models\Book;
 use App\Models\Category;
+use App\Models\MainCategory;
+use App\Models\Service;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -17,12 +19,12 @@ class BookController extends Controller
     public function rules(){
         return [
             "name"          => ["required", "min:10", "max:255"],
-            "age_from"           => ["required", "min:5", "numeric"],
-            "age_to"           => ["required", "min:10", "numeric"],
-            "user_id"       => ["required"],
-            "sub_category"   => ["required"],
+            "age_from"           => ["required", "min:5", "numeric", "lt:age_to"],
+            "age_to"           => ["required", "min:10", "numeric", "gt:age_from"],
+            "category_id"   => ["required"],
             "description"   => ["required"],
-            "made_year"     => ['required']
+            "publishing_year"     => ['required'],
+            "book_photo" => ["required","image"]
         ];
     }
 
@@ -35,7 +37,7 @@ class BookController extends Controller
     public function create()
     {
         $data['users']=User::all();
-        $data['categories']=Category::all();
+        $data['categories'] = Category::where("status", 1)->get();
         return view("admin.books.create",$data);
 
     }
@@ -46,33 +48,56 @@ class BookController extends Controller
         if($valid->fails())
             return redirect()->route("admin.books.create")->withInput($request->all())->withErrors($valid->errors()->messages());
 
-        $book =new book ;
-        $book->is_admin = 1;
+        $book = new book();
         $book->name = $request->name;
         $book->age_from = $request->age_from;
         $book->age_to = $request->age_to;
-        $book->user_id = $request->user_id;
-        $book->category_id = $request->sub_category;
+        $book->category_id = $request->category_id;
         $book->description = $request->description;
-        $book->made_year = $request->made_year;
+        $book->publishing_year = $request->publishing_year;
         $book->save();
+        $book->saveMedia($request->file("book_photo"));
         return redirect()->route("admin.books.index");
     }
 
 
 
-    public function edit($id)
+    public function edit(Request $request)
     {
-
+        $data["book"] = Book::findOrFail($request->id);
+        $data['categories'] = Category::where("status", 1)->get();
+        return view("admin.books.edit", $data);
     }
 
     public function update(Request $request, $id)
     {
+        $rules = $this->rules();
+        if(!$request->hasFile("book_photo"))
+            $rules['book_photo'] = [];
+        $valid = Validator::make($request->all(), $rules);
+        if($valid->fails())
+            return redirect()->route("admin.books.edit", ["id" => $request->id])->withInput($request->all())->withErrors($valid->errors()->messages());
 
+        $book = book::find($request->id);
+        $book->name = $request->name;
+        $book->age_from = $request->age_from;
+        $book->age_to = $request->age_to;
+        $book->category_id = $request->category_id;
+        $book->description = $request->description;
+        $book->publishing_year = $request->publishing_year;
+        $book->save();
+        if($request->hasFile("book_photo")){
+            $book->removeAllFiles();
+            $book->saveMedia($request->file("book_photo"));
+        }
+        return redirect()->route("admin.books.index");
     }
 
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-
+        $book = Book::find($request->id);
+        $book->removeAllFiles();
+        $book->delete();
+        return redirect()->route("admin.books.index");
     }
 }

@@ -1553,6 +1553,7 @@ input, button {border: none;outline: none;background: none;font-family: "Open Sa
     font-size: 0.8em;
     color: #7d7d7d;
     margin-top: 25px;
+    height: 27px;
 }
 .book-cont .booking-card:hover::before {
     background: rgba(10, 72, 112, 0.6);

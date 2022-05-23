@@ -83,15 +83,8 @@ class SubCategoryController extends Controller
             return redirect()->route("admin.sub_category.edit", $urlParams + ["id" => $category->id])->withInput($request->all())->withErrors($valid->errors()->messages());
         }
 
-        $category->name_en = $request->name_en;
-        $category->name_ar = $request->name_ar;
+        $category->name = $request->name;
         $category->save();
-        if($request->hasFile("sub_category_photo")){
-            if($category->getFirstMediaFile()){
-                $category->removeFiles($category->getFirstMediaFile());;
-            }
-            $category->saveMedia($request->file("sub_category_photo"));
-        }
 
 
         return redirect()->route("admin.sub_category.index",$urlParams);

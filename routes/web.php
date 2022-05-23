@@ -81,15 +81,25 @@ Route::group(['middleware' => 'auth:admin'], function () {
             Route::delete("/{id}","Admin\BookController@destroy")->name("destroy");
         });
 
-        Route::get("/sub-categories/by/main-category", "Ajax\MainCategoryController@index")->name("sub_categories.by_main_category");
+        Route::get("/sub-categories/by/main-category", "Ajax\SubCategoryController@getByMainCategory")->name("sub_categories.by_main_category");
+        Route::get("/sub-categories/by/sub-category", "Ajax\SubCategoryController@getBySubCategory")->name("sub_categories.by_sub_category");
 
     });
+});
+
+Route::prefix("ajax")->name("ajax.")->group(function (){
+    Route::get("/", "Ajax\BookController@getSubCategory")->name("get_main_category");
+    Route::get("/sub", "Ajax\BookController@getSubCategoryBySub")->name("get_sub_category");
 });
 
 Route::get("/", "User\DashboardController@index")->name("index");
 
 Route::prefix("books")->name("books.")->group(function (){
     Route::get("/", "User\BooksController@index")->name("index");
+});
+
+Route::prefix("category")->name("category.")->group(function (){
+    Route::get("/", "user\CategoryController@index")->name("index");
 });
 
 Route::prefix("post")->name("post.")->group(function (){

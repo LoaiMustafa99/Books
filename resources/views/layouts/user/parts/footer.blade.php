@@ -3,7 +3,9 @@
         <div class="row">
             <div class="col-sm-12 col-md-6">
                 <h6>About</h6>
-                <p class="text-justify">Scanfcode.com <i>CODE WANTS TO BE SIMPLE </i> is an initiative  to help the upcoming programmers with the code. Scanfcode focuses on providing the most efficient code or snippets as the code wants to be simple. We will help programmers build up concepts in different programming languages that include C, C++, Java, HTML, CSS, Bootstrap, JavaScript, PHP, Android, SQL and Algorithm.</p>
+                <p class="text-justify">
+                    The design of our site comes in the context of enhancing readers’ abilities to acquire knowledge, which is the solid basis for social change and development and modernization events. Reading through its multiple means plays a key tool in acquiring knowledge along with the various methods of teaching and learning. Hence, our site provides an appropriate environment to encourage reading and access and production of knowledge through We suggest books that are suitable for all age groups and books similar to the books you want, and know the true opinions about the book from other readers.
+                </p>
             </div>
 
             <div class="col-xs-6 col-md-3"style="text-align: left;">

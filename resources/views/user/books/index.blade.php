@@ -5,12 +5,12 @@
 
 @section("content")
 
-    <h1 style="text-align: center;margin-top: 50px;color: blanchedalmond;">books</h1>
+    <h1 style="text-align: center;margin-top: 50px;color: #cc984c;">books</h1>
     <hr style="width:30%">
     <a class="btn book-btn-add my-2 my-sm-0">Add Book</a>
     <ul class="book-cont">
         @foreach($books as $book)
-            <li class="booking-card" style="background-image: url(./images/p1.jpg)">
+            <li class="booking-card" style="background-image: url({{$book->getFirstMediaFile()->url}})">
                 <div class="book-container"></div>
                 <div class="informations-container">
                     <h2 class="title">{{$book->name}}</h2>
@@ -20,6 +20,5 @@
                 </div>
             </li>
         @endforeach
-
     </ul>
 @endsection

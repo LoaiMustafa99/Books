@@ -39,7 +39,7 @@
 									<span class="image">
 										<img src="{{asset("images/p2.jpg")}}" alt="" />
 									</span>
-                        <a href="generic.ht5ml">
+                        <a href="{{route("category.index")}}">
                             <h2>Categories</h2>
                             <div class="content">
                                 <!--<p>Sed nisl arcu euismod sit amet nisi lorem etiam dolor veroeros et feugiat.</p>-->

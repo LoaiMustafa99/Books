@@ -33,6 +33,7 @@
                                 <th>{{__("ID")}}</th>
                                 <th>{{__("Name")}}</th>
                                 <th>{{__("Levels Of Sub Categories")}}</th>
+                                <th>{{__("Activation")}}</th>
                                 <th>{{__("Sub Category")}}</th>
                                 <th>{{__("Control")}}</th>
                             </tr>
@@ -43,6 +44,10 @@
                                         <td>{{$category->id}}</td>
                                         <td>{{$category->name}}</td>
                                         <td>{{$category->limit_levels_of_sub_categories}}</td>
+                                        <td class="text-center"> <span class="status-box @if($category->status) bg-active-color @else bg-non-active-color @endif">
+                                            {{$category->status ? __("Active") : __("Non-Active")}}
+                                        </span>
+                                        </td>
                                         <td>
                                             <a href="{{route("admin.sub_category.index", $category->id)}}" class="btn btn-primary">{{__("View")}}</a>
                                         </td>
