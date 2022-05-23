@@ -36,6 +36,15 @@
                                 <div class="input-error">{{$message}}</div>
                                 @enderror
                             </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label class="control-label">{{__("Levels Of Sub Categories")}}</label>
+                                    <input class="form-control @if($errors->has('levels_of_sub_categories')) is-invalid @endif" type="number" name="levels_of_sub_categories" placeholder={{__("Enter Levels Of Sub Categories")}} value="{{inputValue("levels_of_sub_categories")}}">
+                                </div>
+                                @error("levels_of_sub_categories")
+                                <div class="input-error">{{$message}}</div>
+                                @enderror
+                            </div>
                         </div>
 
 {{--                        <hr>--}}

@@ -25,7 +25,7 @@
             <div class="tile">
                 <h3 class="tile-title">{{__("Create New Sub Category")}}</h3>
                 <div class="tile-body">
-                    <form method="post" action="{{route("admin.sub_category.store", $mainCategory->id)}}" enctype="multipart/form-data">
+                    <form method="post" action="{{route("admin.sub_category.store", $urlParams)}}" enctype="multipart/form-data">
                         @csrf
                         <div class="row">
                             <div class="col-lg-6">

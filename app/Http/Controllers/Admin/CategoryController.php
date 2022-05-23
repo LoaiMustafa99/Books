@@ -26,6 +26,7 @@ class CategoryController extends Controller
     {
         $category = new Category();
         $category->name = $request->name;
+        $category->limit_levels_of_sub_categories = $request->levels_of_sub_categories;
         $category->save();
         return redirect()->route("admin.category.index");
     }

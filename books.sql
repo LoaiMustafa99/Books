@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.3
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 21, 2022 at 06:59 AM
--- Server version: 10.4.14-MariaDB
--- PHP Version: 7.4.11
+-- Generation Time: May 23, 2022 at 03:56 PM
+-- Server version: 10.4.22-MariaDB
+-- PHP Version: 7.4.27
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -67,13 +67,6 @@ CREATE TABLE `book` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `book`
---
-
-INSERT INTO `book` (`id`, `name`, `user_id`, `is_admin`, `image`, `description`, `age_from`, `age_to`, `made_year`, `category_id`, `created_at`, `updated_at`) VALUES
-(1, 'Je suis un billet pour aller visiter un truc', 2, 1, NULL, 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quasi eveniet perferendis culpa. Expedita architecto nesciunt, rem distinctio', 5, 10, '2022-04-14', 2, '2022-04-12 18:47:51', '2022-04-12 18:47:51');
-
 -- --------------------------------------------------------
 
 --
@@ -84,6 +77,7 @@ CREATE TABLE `category` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `limit_levels_of_sub_categories` smallint(6) NOT NULL,
+  `status` tinyint(4) NOT NULL DEFAULT 0,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -92,10 +86,10 @@ CREATE TABLE `category` (
 -- Dumping data for table `category`
 --
 
-INSERT INTO `category` (`id`, `name`, `limit_levels_of_sub_categories`, `created_at`, `updated_at`) VALUES
-(1, 'Ram 17GBtrhrft', 1, '2022-03-12 21:56:47', '2022-04-11 18:50:11'),
-(2, 'Eman', 1, '2022-03-18 14:33:44', '2022-03-18 14:33:44'),
-(4, 'Read Book', 1, '2022-03-18 14:35:13', '2022-04-11 18:52:41');
+INSERT INTO `category` (`id`, `name`, `limit_levels_of_sub_categories`, `status`, `created_at`, `updated_at`) VALUES
+(1, 'Ram 17GBtrhrft', 2, 0, '2022-03-12 21:56:47', '2022-05-23 10:41:11'),
+(2, 'Eman', 1, 0, '2022-03-18 14:33:44', '2022-03-18 14:33:44'),
+(4, 'Read Book', 1, 0, '2022-03-18 14:35:13', '2022-04-11 18:52:41');
 
 -- --------------------------------------------------------
 
@@ -322,15 +316,6 @@ CREATE TABLE `sub_categories` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `sub_categories`
---
-
-INSERT INTO `sub_categories` (`id`, `name`, `main_id`, `level`, `parent_id`, `created_at`, `updated_at`) VALUES
-(1, 'Ram 17GB', 1, 1, NULL, '2022-05-15 18:23:29', '2022-05-15 18:23:29'),
-(2, 'Ram 17GB', 1, 1, NULL, '2022-05-15 18:23:54', '2022-05-15 18:23:54'),
-(3, 'Malle', 1, 1, NULL, '2022-05-15 18:24:00', '2022-05-15 18:24:00');
-
 -- --------------------------------------------------------
 
 --
@@ -497,7 +482,7 @@ ALTER TABLE `book`
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `comments`
@@ -563,7 +548,7 @@ ALTER TABLE `reed_book_now`
 -- AUTO_INCREMENT for table `sub_categories`
 --
 ALTER TABLE `sub_categories`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `users`
