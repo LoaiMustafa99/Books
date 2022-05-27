@@ -61,9 +61,9 @@
                     <!--4-->
                     <article class="style4">
 									<span class="image">
-										<img src="{{asset("images/p4.jpg")}}" alt="" />
+										<img src="{{asset("images/p7.png")}}" alt="" />
 									</span>
-                        <a href="generic.ht5ml">
+                        <a href="{{route("reader.profile.index")}}">
                             <h2>Setting</h2>
                             <div class="content">
                                 <!--<p>Sed nisl arcu euismod sit amet nisi lorem etiam dolor veroeros et feugiat.</p>-->
@@ -75,7 +75,7 @@
 									<span class="image">
 										<img src="{{asset("images/p5.jpg")}}" alt="" />
 									</span>
-                        <a href="generic.htm5l">
+                        <a href="{{route("rating.index")}}">
                             <h2>Rating</h2>
                             <div class="content">
                                 <!--<p>Sed nisl arcu euismod sit amet nisi lorem etiam dolor veroeros et feugiat.</p>-->
@@ -83,17 +83,17 @@
                         </a>
                     </article>
                     <!--6-->
-                    <article class="style6">
-									<span class="image">
-										<img src="{{asset("images/p6.jpg")}}" alt="" />
-									</span>
-                        <a href="generic.htm5l">
-                            <h2>List</h2>
-                            <div class="content">
-                                <!--<p>Sed nisl arcu euismod sit amet nisi lorem etiam dolor veroeros et feugiat.</p>-->
-                            </div>
-                        </a>
-                    </article>
+{{--                    <article class="style6">--}}
+{{--									<span class="image">--}}
+{{--										<img src="{{asset("images/p6.jpg")}}" alt="" />--}}
+{{--									</span>--}}
+{{--                        <a href="generic.htm5l">--}}
+{{--                            <h2>List</h2>--}}
+{{--                            <div class="content">--}}
+{{--                                <!--<p>Sed nisl arcu euismod sit amet nisi lorem etiam dolor veroeros et feugiat.</p>-->--}}
+{{--                            </div>--}}
+{{--                        </a>--}}
+{{--                    </article>--}}
 
                 </section>
             </div>

@@ -8,6 +8,11 @@
     <h1 style="text-align: center;margin-top: 50px;color: #cc984c;">books</h1>
     <hr style="width:30%">
     <div class="container">
+        <div class="row m-auto">
+            <div class="col-6" data-url="{{route("ajax.search")}}">
+                <input style="margin-left: 260px" type="text" placeholder="Search...." id="search" class="form-control">
+            </div>
+        </div>
         <div class="row text-left">
             <div class="col-6">
                 <label for="">Main Category</label>
@@ -33,7 +38,7 @@
             <li class="booking-card" style="background-image: url({{$book->getFirstMediaFile()->url}})">
                 <div class="book-container"></div>
                 <div class="informations-container">
-                    <h2 class="title">{{$book->name}}</h2>
+                    <h2 class="title"><a href="{{route("category.show", ["id" => $book->id])}}">{{$book->name}}</a></h2>
                     <div class="more-information">
                         <p class="disclaimer">{{$book->description}}</p>
                     </div>
@@ -72,10 +77,12 @@
                     $("#subCategory").append(option);
                     $(".BoxSubCategory").fadeIn();
                     data.books.forEach((book) => {
+                        let url = "{{ route('category.show', ':id') }}";
+                        url = url.replace(':id', book.id);
                         card += `<li class="booking-card" style="background-image: url(${book.image})">
                                     <div class="book-container"></div>
                                     <div class="informations-container">
-                                        <h2 class="title">${book.name}</h2>
+                                        <h2 class="title"><a href="${url}">${book.name}</a></h2>
                                         <div class="more-information">
                                             <p class="disclaimer">${book.description}</p>
                                         </div>
@@ -118,10 +125,12 @@
                     $("#subCategory").append(option);
                     $(".BoxSubCategory").fadeIn();
                     data.books.forEach((book) => {
+                        let url = "{{ route('category.show', ':id') }}";
+                        url = url.replace(':id', book.id);
                         card += `<li class="booking-card" style="background-image: url(${book.image})">
                                     <div class="book-container"></div>
                                     <div class="informations-container">
-                                        <h2 class="title">${book.name}</h2>
+                                        <h2 class="title"><a href="${url}">${book.name}</a></h2>
                                         <div class="more-information">
                                             <p class="disclaimer">${book.description}</p>
                                         </div>
@@ -129,6 +138,43 @@
                                 </li>`;
                     })
                     $("#BoxBooks").append(card).fadeIn();
+                },
+                error : function (response) {
+                    resolve(response);
+                }
+            });
+        });
+
+        $("#search").on("keyup", function () {
+            $("#BoxBooks").fadeOut();
+            var text = $(this).val(),
+            url = $(this).parent("div").data("url");
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                type: "GET",
+                url: url,
+                data: {"text": text},
+                success: function( response ) {
+                    const data = response.data;
+                    var card = "";
+                    data.books.forEach((book) => {
+                    let url = "{{ route('category.show', ':id') }}";
+                    url = url.replace(':id', book.id);
+                    card += `<li class="booking-card" style="background-image: url(${book.image})">
+                                <div class="book-container"></div>
+                                <div class="informations-container">
+                                    <h2 class="title"><a href="${url}">${book.name}</a></h2>
+                                    <div class="more-information">
+                                        <p class="disclaimer">${book.description}</p>
+                                    </div>
+                                </div>
+                            </li>`;
+                    });
+                    $("#BoxBooks").empty().append(card).fadeIn();
                 },
                 error : function (response) {
                     resolve(response);

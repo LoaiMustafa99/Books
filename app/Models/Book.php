@@ -25,6 +25,10 @@ class Book extends Model implements IMedia
         return  $this->getFullName($this->category);
     }
 
+    public function comment(){
+        return $this->hasMany(BookComment::class, "book_id");
+    }
+
     //Logicly Methods
     private function getFullName($category) : string{
         $name = '';

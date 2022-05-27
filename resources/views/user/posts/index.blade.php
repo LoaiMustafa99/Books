@@ -21,6 +21,7 @@
                                 <div class="since">{{$post->created_at->diffForHumans()}}</div>
                             </div>
                         </div>
+                        @if(\Illuminate\Support\Facades\Auth::guard("reader")->check() && \Illuminate\Support\Facades\Auth::guard("reader")->user()->id == $post->user_id)
                         <div class="right row justify-content-around" style="width: 10%">
                             <form action="{{route("post.destroy", $post->id)}}" method="POST">
                                 @csrf
@@ -29,12 +30,13 @@
                             </form>
                             <a href="{{route("post.edit", $post->id)}}" class="btn btn-success btn-sm">{{__("Edit")}}</a>
                         </div>
+                        @endif
                     </div>
                     <div class="content">
                         <p class="post-text">
                             {{$post->description}}
                         </p>
-                        <div style="width: 100%;height: 646px;">
+                        <div style="width: 100%;height: 484px;">
                             <img class="post-img" style="max-width: 100%;max-height: 100%;object-fit: cover;" src="{{$post->getFirstMediaFile() ? $post->getFirstMediaFile()->url : Null}}">
                         </div>
                     </div>

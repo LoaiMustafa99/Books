@@ -3,9 +3,10 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use App\Providers\RouteServiceProvider;
-use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
@@ -75,6 +76,32 @@ class RegisterController extends Controller
     public function showRegisterForm()
     {
         return view('auth.register');
+    }
+
+    public function rules(){
+        return [
+            "username" => ["required"],
+            "full_name" => ["required"],
+            "email" => ['required', "email"],
+            "birth_date" => ["required"],
+            "password" => ['required'],
+            "confirm_password" => ["required", "same:password"]
+        ];
+    }
+
+    public function createUser(Request $request){
+        $valid = Validator::make($request->all(), $this->rules());
+        if($valid->fails())
+            return redirect()->back()->withInput($request->all())->withErrors($valid->errors()->messages());
+
+        $user = new User();
+        $user->username = $request->username;
+        $user->full_name = $request->full_name;
+        $user->email = $request->email;
+        $user->birth_date = $request->birth_date;
+        $user->password = Hash::make($request->password);
+        $user->save();
+        return redirect()->route("user.login");
     }
 
 }

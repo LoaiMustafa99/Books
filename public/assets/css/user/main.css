@@ -1601,7 +1601,7 @@ input, button {border: none;outline: none;background: none;font-family: "Open Sa
 
 .t-item {
     margin: auto;
-    max-width:70%;
+    max-width:54%;
     width: 98%;
     border-radius: 5px;
     border: 1px solid #dddfe2;
@@ -1947,3 +1947,8 @@ i.material-icons {
     }
 }
 /*upload img*/
+.input-error{
+    font-size: 12px;
+    color: red;
+    margin: 0;
+}

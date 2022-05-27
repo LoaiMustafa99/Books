@@ -12,9 +12,11 @@
             <li class="nav-item">
                 <a class="nav-link col-item" href="#">Contact</a>
             </li>
+            @if(\Illuminate\Support\Facades\Auth::guard("reader")->check())
             <li class="nav-item">
                 <a class="nav-link col-item" href="{{route("post.create")}}">Add Post</a>
             </li>
+            @endif
         </ul>
         @if(!\Illuminate\Support\Facades\Auth::guard("reader")->check())
         <form class="form-inline my-2 my-lg-0" method="get" action="{{route("user.login")}}">

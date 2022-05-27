@@ -31,8 +31,11 @@ Route::post('/login/reader', 'Auth\LoginController@bloggerLogin');
 
 Route::group(['middleware' => 'auth:reader'], function () {
     Auth::routes();
-    Route::prefix("/dashboard")->name("dashboard.")->group(function (){
-        Route::get("/", "Admin\DashboardController@index")->name("index");
+    Route::prefix("reader")->name("reader.")->group(function (){
+        Route::prefix("profile")->name("profile.")->group(function (){
+            Route::get("/", "User\ProfileController@index")->name("index");
+            Route::post("/{id}", "User\ProfileController@update")->name("update");
+        });
     });
 });
 
@@ -90,6 +93,7 @@ Route::group(['middleware' => 'auth:admin'], function () {
 Route::prefix("ajax")->name("ajax.")->group(function (){
     Route::get("/", "Ajax\BookController@getSubCategory")->name("get_main_category");
     Route::get("/sub", "Ajax\BookController@getSubCategoryBySub")->name("get_sub_category");
+    Route::get("/search", "Ajax\SearchController@index")->name("search");
 });
 
 Route::get("/", "User\DashboardController@index")->name("index");
@@ -100,6 +104,24 @@ Route::prefix("books")->name("books.")->group(function (){
 
 Route::prefix("category")->name("category.")->group(function (){
     Route::get("/", "user\CategoryController@index")->name("index");
+    Route::get("/book/{id}", "user\CategoryController@show")->name("show");
+
+    Route::prefix("book/{book_id}/comment")->name("comment.")->group(function (){
+        Route::post("/", "User\BookCommentController@store")->name("store");
+        Route::post("/delete", "User\BookCommentController@destroy")->name("delete");
+    });
+
+    Route::prefix("book/{book_id}/rating")->name("rating.")->group(function (){
+        Route::post("/", "User\CategoryController@rating")->name("store");
+    });
+
+    Route::prefix("book/{book_id}/favorite")->name("favorite.")->group(function (){
+        Route::post("/", "User\BookFavoriteController@store")->name("store");
+    });
+});
+
+Route::prefix("rating")->name("rating.")->group(function (){
+    Route::get("/", "User\RatingController@index")->name("index");
 });
 
 Route::prefix("post")->name("post.")->group(function (){
