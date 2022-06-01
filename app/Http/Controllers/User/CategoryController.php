@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Auth;
 class CategoryController extends Controller
 {
     public function index(){
-        $data['books'] = Book::all();
+        $data['books'] = Book::where("approved", 1)->get();
         $data['categories'] = Category::where("status", 1)->get();
         return view("user.category.index", $data);
     }

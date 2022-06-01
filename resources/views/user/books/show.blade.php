@@ -135,7 +135,7 @@
 
     .comments .person-type { font-size: 12px;margin:0;padding: 0; text-align: center;line-height: .8;}
 
-    .box2 .box-comment { background-color: #e7e7e7; padding: 12px 14px 4px; margin-top: 20px; border-radius: 9px; width: 45%; position: relative;}
+    .box2 .box-comment { background-color: #e7e7e7; padding: 12px 14px 12px; margin-top: 20px; border-radius: 9px; width: 45%; position: relative;}
 
     .box2 .box-comment:after {
         content: "";
@@ -259,13 +259,13 @@
             <div class="all-comment">
                 @if($book->comment->isNotEmpty())
                     @foreach($book->comment as $comment)
-                        <div class="row commentBox" data-id="{{$comment->id}}" id="comment{{$comment->id}}">
+                        <div class="row" id="comment{{$comment->id}}">
                             <div class="user-info-box">
                                 <div class="comments">
                                     <div class="img-box-comment">
                                         <img src="{{$comment->user->getFirstMediaFile("profile_photo") ? $comment->user->getFirstMediaFile("profile_photo")->url : $comment->user->defaultUserPhoto()}}">
                                     </div>
-                                    <div class="person-name"><a href="#">{{$comment->user->full_name}}</a></div>
+                                    <div class="person-name"><a href="#">{{$comment->user->username}}</a></div>
                                 </div>
                             </div>
                             <div class="col-lg-10 col-md-12 box2 commentTextBox">
@@ -277,7 +277,7 @@
                                         <div class="comment-time">{{$comment->created_at->diffForHumans()}}</div>
                                         @if(\Illuminate\Support\Facades\Auth::guard("reader")->check() && \Illuminate\Support\Facades\Auth::guard("reader")->user()->id == $comment->user_id)
                                         <div class="comment-buttons">
-                                            <button class="btn deleteCommentButton deleteBtn-of-comment-section hvr-grow" data-commentid="1"><i class="far fa-trash-alt"></i></button>
+                                            <button class="btn deleteCommentButton deleteBtn-of-comment-section hvr-grow commentBox" data-id="{{$comment->id}}" data-commentid="1"><i class="far fa-trash-alt"></i></button>
                                         </div>
                                         @endif
                                         <div class="clear"></div>

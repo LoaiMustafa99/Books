@@ -54,7 +54,7 @@
     }
 </style>
 @section("content")
-
+@include("includes.dialog")
     <section class="ftco-section">
         <div class="container">
             <form method="POST" action="{{route("reader.profile.update", ["id" => $user->id])}}" class="billing-form" enctype="multipart/form-data">
@@ -86,7 +86,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Email</label>
-                                    <input type="email" name="email" class="form-control" value="{{$user->email}}" required>
+                                    <input type="email" name="email" disabled class="form-control" value="{{$user->email}}" required>
                                     @error("email")
                                     <div class="input-error">{{$message}}</div>
                                     @enderror
@@ -113,6 +113,15 @@
                         </div>
                         <h3 class="mb-4 billing-heading">Security</h3>
                         <div class="row align-items-end">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Old Password</label>
+                                    <input type="password" name="old_password" class="form-control">
+                                    @error("old_password")
+                                    <div class="input-error">{{$message}}</div>
+                                    @enderror
+                                </div>
+                            </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Password</label>

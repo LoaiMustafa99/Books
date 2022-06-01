@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 27, 2022 at 10:21 PM
+-- Generation Time: Jun 02, 2022 at 12:16 AM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.11
 
@@ -60,6 +60,8 @@ CREATE TABLE `book` (
   `age_to` int(11) NOT NULL,
   `publishing_year` date NOT NULL,
   `category_id` bigint(20) UNSIGNED NOT NULL,
+  `user_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `approved` tinyint(4) NOT NULL DEFAULT 1,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -68,9 +70,10 @@ CREATE TABLE `book` (
 -- Dumping data for table `book`
 --
 
-INSERT INTO `book` (`id`, `name`, `description`, `age_from`, `age_to`, `publishing_year`, `category_id`, `created_at`, `updated_at`) VALUES
-(4, 'The Atlas Six by Olivie Blake', 'Why You’ll Love It: After becoming a BookTok sensation in the summer of 2021, The Atlas Six is getting a newly revised hardcover rerelease to hype everyone up for the arrival of its sequel The Atlas Paradox later this year. And if you missed the memo on this story the first time now is your chance to catch up. Blake’s novel has a little bit of everything: dark academia vibes, hot magicians, secret societies, a twisty plot, and an array of diverse, intriguing characters at its center. Get in on it now before the already commissioned Amazon series arrives. \r\nPublisher’s Description: The Alexandrian Society is a secret society of magical academicians, the best in the world. Their members are caretakers of lost knowledge from the greatest civilizations of antiquity. And those who earn a place among their number will secure a life of wealth, power, and prestige beyond their wildest dreams. Each decade, the world’s six most uniquely talented magicians are selected for initiation – and here are the chosen few…\r\n- Libby Rhodes and Nicolás Ferrer de Varona: inseparable enemies, cosmologists who can control matter with their minds.\r\n- Reina Mori: a naturalist who can speak the language of life itself.\r\n- Parisa Kamali: a mind reader whose powers of seduction are unmatched.\r\n- Tristan Caine: the son of a crime kingpin who can see the secrets of the universe.\r\n- Callum Nova: an insanely rich pretty boy who could bring about the end of the world. He need only ask.\r\nWhen the candidates are recruited by the mysterious Atlas Blakely, they are told they must spend one year together to qualify for initiation. During this time, they will be permitted access to the Society’s archives and judged on their contributions to arcane areas of knowledge. Five, they are told, will be initiated. One will be eliminated. If they can prove themselves to be the best, they will survive. Most of them.', 10, 25, '2021-01-23', 21, '2022-05-23 13:26:23', '2022-05-23 13:26:23'),
-(5, 'Gallant by V.E. Schwab', 'Why You’ll Love It: V.E. Schwab’s haunting new young adult fantasy about a young girl’s search for the home she’s always wanted is a lush, diamond-sharp bit of horror writing, with beautiful visuals, incredible worldbuilding, and a charmingly offbeat found family at its core. The incorporation of different forms of communication—Olivia speaks to others in sign language and the writings and drawings left behind in a journal are all she has left of either of her parents—is incredibly creative, and the spooky, shadow-filled setting is impeccably rendered throughout.\r\nPublisher’s Description: Olivia Prior has grown up in Merilance School for girls, and all she has of her past is her mother’s journal—which seems to unravel into madness. Then, a letter invites Olivia to come home—to Gallant. Yet when Olivia arrives, no one is expecting her. But Olivia is not about to leave the first place that feels like home, it doesn’t matter if her cousin Matthew is hostile or if she sees half-formed ghouls haunting the hallways.\r\nOlivia knows that Gallant is hiding secrets, and she is determined to uncover them. When she crosses a ruined wall at just the right moment, Olivia finds herself in a place that is Gallant—but not. The manor is crumbling, the ghouls are solid, and a mysterious figure rules over all. Now Olivia sees what has unraveled generations of her family, and where her father may have come from.', 15, 35, '2020-05-27', 21, '2022-05-27 15:56:47', '2022-05-27 15:56:47');
+INSERT INTO `book` (`id`, `name`, `description`, `age_from`, `age_to`, `publishing_year`, `category_id`, `user_id`, `approved`, `created_at`, `updated_at`) VALUES
+(4, 'The Atlas Six by Olivie Blake', 'Why You’ll Love It: After becoming a BookTok sensation in the summer of 2021, The Atlas Six is getting a newly revised hardcover rerelease to hype everyone up for the arrival of its sequel The Atlas Paradox later this year. And if you missed the memo on this story the first time now is your chance to catch up. Blake’s novel has a little bit of everything: dark academia vibes, hot magicians, secret societies, a twisty plot, and an array of diverse, intriguing characters at its center. Get in on it now before the already commissioned Amazon series arrives. \r\nPublisher’s Description: The Alexandrian Society is a secret society of magical academicians, the best in the world. Their members are caretakers of lost knowledge from the greatest civilizations of antiquity. And those who earn a place among their number will secure a life of wealth, power, and prestige beyond their wildest dreams. Each decade, the world’s six most uniquely talented magicians are selected for initiation – and here are the chosen few…\r\n- Libby Rhodes and Nicolás Ferrer de Varona: inseparable enemies, cosmologists who can control matter with their minds.\r\n- Reina Mori: a naturalist who can speak the language of life itself.\r\n- Parisa Kamali: a mind reader whose powers of seduction are unmatched.\r\n- Tristan Caine: the son of a crime kingpin who can see the secrets of the universe.\r\n- Callum Nova: an insanely rich pretty boy who could bring about the end of the world. He need only ask.\r\nWhen the candidates are recruited by the mysterious Atlas Blakely, they are told they must spend one year together to qualify for initiation. During this time, they will be permitted access to the Society’s archives and judged on their contributions to arcane areas of knowledge. Five, they are told, will be initiated. One will be eliminated. If they can prove themselves to be the best, they will survive. Most of them.', 10, 25, '2021-01-23', 21, NULL, 1, '2022-05-23 13:26:23', '2022-05-23 13:26:23'),
+(5, 'Gallant by V.E. Schwab', 'Why You’ll Love It: V.E. Schwab’s haunting new young adult fantasy about a young girl’s search for the home she’s always wanted is a lush, diamond-sharp bit of horror writing, with beautiful visuals, incredible worldbuilding, and a charmingly offbeat found family at its core. The incorporation of different forms of communication—Olivia speaks to others in sign language and the writings and drawings left behind in a journal are all she has left of either of her parents—is incredibly creative, and the spooky, shadow-filled setting is impeccably rendered throughout.\r\nPublisher’s Description: Olivia Prior has grown up in Merilance School for girls, and all she has of her past is her mother’s journal—which seems to unravel into madness. Then, a letter invites Olivia to come home—to Gallant. Yet when Olivia arrives, no one is expecting her. But Olivia is not about to leave the first place that feels like home, it doesn’t matter if her cousin Matthew is hostile or if she sees half-formed ghouls haunting the hallways.\r\nOlivia knows that Gallant is hiding secrets, and she is determined to uncover them. When she crosses a ruined wall at just the right moment, Olivia finds herself in a place that is Gallant—but not. The manor is crumbling, the ghouls are solid, and a mysterious figure rules over all. Now Olivia sees what has unraveled generations of her family, and where her father may have come from.', 15, 35, '2020-05-27', 21, NULL, 1, '2022-05-27 15:56:47', '2022-05-27 15:56:47'),
+(8, 'Head phone1', 'mxc jnkxcnb kjc bjnxc', 10, 60, '2016-01-02', 21, 2, 1, '2022-06-01 18:40:47', '2022-06-01 18:41:47');
 
 -- --------------------------------------------------------
 
@@ -92,7 +95,10 @@ CREATE TABLE `book_comments` (
 --
 
 INSERT INTO `book_comments` (`id`, `text`, `user_id`, `book_id`, `created_at`, `updated_at`) VALUES
-(10, 'Test', 2, 4, '2022-05-27 16:37:07', '2022-05-27 16:37:07');
+(19, 'erterger', 4, 8, '2022-06-01 19:00:53', '2022-06-01 19:00:53'),
+(20, 'drgred', 4, 5, '2022-06-01 19:01:21', '2022-06-01 19:01:21'),
+(21, 'rgerge', 4, 4, '2022-06-01 19:01:31', '2022-06-01 19:01:31'),
+(22, 'ererger', 2, 8, '2022-06-01 19:02:08', '2022-06-01 19:02:08');
 
 -- --------------------------------------------------------
 
@@ -107,6 +113,13 @@ CREATE TABLE `book_favorites` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `book_favorites`
+--
+
+INSERT INTO `book_favorites` (`id`, `user_id`, `book_id`, `created_at`, `updated_at`) VALUES
+(7, 2, 4, '2022-05-29 18:36:50', '2022-05-29 18:36:50');
 
 -- --------------------------------------------------------
 
@@ -148,14 +161,6 @@ CREATE TABLE `comments` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `comments`
---
-
-INSERT INTO `comments` (`id`, `text`, `user_id`, `post_id`, `created_at`, `updated_at`) VALUES
-(8, 'Test Comment', 2, 6, '2022-05-17 18:39:42', '2022-05-17 18:39:42'),
-(9, 'Eman Test', 2, 6, '2022-05-17 18:40:16', '2022-05-17 18:40:16');
-
 -- --------------------------------------------------------
 
 --
@@ -195,10 +200,9 @@ CREATE TABLE `media` (
 INSERT INTO `media` (`id`, `filename`, `path`, `group`, `media_type`, `type_id`, `created_at`, `updated_at`) VALUES
 (2, '16528136091094422681835.png', 'uploads/posts/2', 'main', 'App\\Models\\Post', 2, '2022-05-17 15:53:29', '2022-05-17 15:53:29'),
 (3, '16528151921475524391740.jpg', 'uploads/posts/3', 'main', 'App\\Models\\Post', 3, '2022-05-17 16:19:52', '2022-05-17 16:19:52'),
-(7, '1652823405401722078555.png', 'uploads/posts/6', 'main', 'App\\Models\\Post', 6, '2022-05-17 18:36:45', '2022-05-17 18:36:45'),
 (12, '16533231833294138552250.png', 'uploads/book/4', 'main', 'App\\Models\\Book', 4, '2022-05-23 13:26:23', '2022-05-23 13:26:23'),
-(13, '16534191551715757112335.jpg', 'uploads/posts/9', 'main', 'App\\Models\\Post', 9, '2022-05-24 16:05:55', '2022-05-24 16:05:55'),
-(15, '16536778072763727692775.jpg', 'uploads/book/5', 'main', 'App\\Models\\Book', 5, '2022-05-27 15:56:47', '2022-05-27 15:56:47');
+(15, '16536778072763727692775.jpg', 'uploads/book/5', 'main', 'App\\Models\\Book', 5, '2022-05-27 15:56:47', '2022-05-27 15:56:47'),
+(18, '1654119647292900006945.jpg', 'uploads/book/8', 'main', 'App\\Models\\Book', 8, '2022-06-01 18:40:47', '2022-06-01 18:40:47');
 
 -- --------------------------------------------------------
 
@@ -280,14 +284,6 @@ CREATE TABLE `posts` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `posts`
---
-
-INSERT INTO `posts` (`id`, `description`, `user_id`, `created_at`, `updated_at`) VALUES
-(6, 'Test Description For Post', 2, '2022-05-17 18:36:45', '2022-05-17 18:36:45'),
-(9, 'rthrth cgbdbfgbdfg dfg', 2, '2022-05-24 16:05:55', '2022-05-24 16:05:55');
-
 -- --------------------------------------------------------
 
 --
@@ -309,7 +305,10 @@ CREATE TABLE `rating` (
 
 INSERT INTO `rating` (`id`, `user_id`, `book_id`, `number_rating`, `created_at`, `updated_at`) VALUES
 (2, 2, 4, 5, '2022-05-27 08:25:17', '2022-05-27 15:26:42'),
-(3, 2, 5, 1, '2022-05-27 15:58:54', '2022-05-27 15:58:54');
+(3, 2, 5, 2, '2022-05-27 15:58:54', '2022-05-29 18:36:27'),
+(4, 2, 8, 4, '2022-06-01 18:42:19', '2022-06-01 18:42:19'),
+(5, 4, 8, 3, '2022-06-01 18:47:17', '2022-06-01 18:47:17'),
+(6, 4, 4, 1, '2022-06-01 19:00:04', '2022-06-01 19:00:04');
 
 -- --------------------------------------------------------
 
@@ -333,7 +332,7 @@ CREATE TABLE `sub_categories` (
 
 INSERT INTO `sub_categories` (`id`, `name`, `main_id`, `level`, `parent_id`, `created_at`, `updated_at`) VALUES
 (20, 'Test', 1, 1, NULL, '2022-05-23 12:23:03', '2022-05-23 16:30:23'),
-(21, 'Loai', 1, 2, 20, '2022-05-23 12:23:10', '2022-05-23 12:23:10'),
+(21, 'Eman', 1, 2, 20, '2022-05-23 12:23:10', '2022-05-29 18:40:31'),
 (22, 'Ram 17GB', 1, 2, 20, '2022-05-23 18:03:56', '2022-05-23 18:03:56'),
 (23, 'Malle', 1, 2, 20, '2022-05-23 18:04:01', '2022-05-23 18:04:01'),
 (24, 'رعب', 10, 1, NULL, '2022-05-23 18:24:07', '2022-05-23 18:24:07'),
@@ -364,8 +363,9 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `full_name`, `username`, `email`, `email_verified_at`, `password`, `birth_date`, `remember_token`, `created_at`, `updated_at`) VALUES
-(2, 'Eman2', 'Eman2', 'Eman@gmail.com', NULL, '$2y$10$72tGlP9WtwzL1VccN2jzGOAkV0SN2R2jSZXGaASE45.lTJoWzvaWG', '2022-03-13', NULL, '2022-03-29 18:43:52', '2022-05-24 16:24:34'),
-(3, 'User', 'User1', 'User@gmail.com', NULL, '$2y$10$xVpA69XPdTl916.JnlFgsuoL6sfDsbpGcaplRWkyPG1W/xvDYTqb.', '1999-01-24', NULL, '2022-05-24 14:35:31', '2022-05-24 14:35:31');
+(2, 'Eman2', 'Eman2', 'Eman@gmail.com', NULL, '$2y$10$i6lNP5qu/f15ilBr.3lqme2bqwKYSbpfQDWmhQ0CUxiy/1D4yTvq.', '1999-04-09', NULL, '2022-03-29 18:43:52', '2022-06-01 18:43:19'),
+(3, 'User', 'User1', 'User@gmail.com', NULL, '$2y$10$xVpA69XPdTl916.JnlFgsuoL6sfDsbpGcaplRWkyPG1W/xvDYTqb.', '1999-01-24', NULL, '2022-05-24 14:35:31', '2022-05-24 14:35:31'),
+(4, 'User1', 'User1', 'User1@gmail.com', NULL, '$2y$10$mOREdxc83eRLptxs8W.dKulsfhEZDttrosayw/lphjHXO6nz/Ffie', '1999-02-02', NULL, '2022-06-01 18:46:45', '2022-06-01 18:46:45');
 
 --
 -- Indexes for dumped tables
@@ -383,7 +383,8 @@ ALTER TABLE `admin`
 --
 ALTER TABLE `book`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `book_category_id_index` (`category_id`);
+  ADD KEY `book_category_id_index` (`category_id`),
+  ADD KEY `user_id` (`user_id`);
 
 --
 -- Indexes for table `book_comments`
@@ -491,19 +492,19 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `book`
 --
 ALTER TABLE `book`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `book_comments`
 --
 ALTER TABLE `book_comments`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `book_favorites`
 --
 ALTER TABLE `book_favorites`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `category`
@@ -527,7 +528,7 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `media`
 --
 ALTER TABLE `media`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `migrations`
@@ -551,7 +552,7 @@ ALTER TABLE `posts`
 -- AUTO_INCREMENT for table `rating`
 --
 ALTER TABLE `rating`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `sub_categories`
@@ -563,7 +564,7 @@ ALTER TABLE `sub_categories`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Constraints for dumped tables
@@ -573,7 +574,8 @@ ALTER TABLE `users`
 -- Constraints for table `book`
 --
 ALTER TABLE `book`
-  ADD CONSTRAINT `book_category_id_foreign` FOREIGN KEY (`category_id`) REFERENCES `sub_categories` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `book_category_id_foreign` FOREIGN KEY (`category_id`) REFERENCES `sub_categories` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `book_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `book_comments`

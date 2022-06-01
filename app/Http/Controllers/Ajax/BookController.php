@@ -14,7 +14,7 @@ class BookController extends Controller
         $data = [];
         $data['categories'] = $sub = SubCategory::where([["main_id", $request->id], ["level", 1]])->get();
         $books = Book::join("sub_categories", "sub_categories.id", "=", "book.category_id")->join("category", "category.id", "=", "sub_categories.main_id")
-            ->where("category.id", $request->id)->get("book.*");
+            ->where("category.id", $request->id)->where("book.approved", 1)->get("book.*");
         foreach ($books as $index => $book){
             $data["books"][$index]['name'] = $book->name;
             $data["books"][$index]['description'] = $book->description;
@@ -26,8 +26,9 @@ class BookController extends Controller
 
     public function getSubCategoryBySub(Request $request){
         $data['categories'] = $sub = SubCategory::where("parent_id", $request->id)->get();
-        $books = Book::join("sub_categories", "sub_categories.id", "=", "book.category_id")
-            ->where("sub_categories.id", $request->id)->orWhere("parent_id", $request->id)->get("book.*");
+        $books = Book::join("sub_categories", "sub_categories.id", "=", "book.category_id")->where("book.approved", 1)->where(function ($q) use ($request){
+            $q->where("sub_categories.id", $request->id)->orWhere("parent_id", $request->id);
+        })->get("book.*");
         foreach ($books as $index => $book){
             $data["books"][$index]['name'] = $book->name;
             $data["books"][$index]['description'] = $book->description;

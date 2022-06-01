@@ -24,7 +24,7 @@
                 <div class="sub-cont">
                     <div class="img">
                         <div class="img__text">
-                            <h2 class="logo-opinion"><span> opinion</span> top</h2>
+                            <h2 class="logo-opinion"><span> Opinion in</span> the top</h2>
                             <p>If you do not have an account</p>
                             <a href="{{route("register.user")}}" class="sign-btn">sign up</a>
                         </div>

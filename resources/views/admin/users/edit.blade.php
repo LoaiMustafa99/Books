@@ -6,7 +6,6 @@
     <div class="app-title">
         <div>
             <h1><i class="fa fa-dashboard"></i>{{__("Users")}}</h1>
-            <p>{{__("All Users")}}</p>
         </div>
 
         <ul class="app-breadcrumb breadcrumb">
@@ -61,15 +60,6 @@
                                     <input class="form-control @if($errors->has('password')) is-invalid @endif" type="password" name="password" placeholder="{{__("Enter Password")}}">
                                 </div>
                                 @error("password")
-                                <div class="input-error">{{$message}}</div>
-                                @enderror
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="form-group">
-                                    <label class="control-label">{{__("Age")}}</label>
-                                    <input class="form-control @if($errors->has('age')) is-invalid @endif" type="number" name="age" placeholder="{{__("Enter Age")}}" value="{{$user->age}}">
-                                </div>
-                                @error("age")
                                 <div class="input-error">{{$message}}</div>
                                 @enderror
                             </div>

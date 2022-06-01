@@ -30,7 +30,7 @@ class BookController extends Controller
 
     public function index()
     {
-        $data['books'] = Book::all();
+        $data['books'] = Book::where("approved", 1)->get();
         return view("admin.books.index",$data);
     }
 

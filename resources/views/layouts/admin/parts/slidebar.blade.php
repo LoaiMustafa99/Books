@@ -27,6 +27,8 @@
         <!------------------------- Books -------------------------->
         <li><a class="app-menu__item @if(request()->routeIs("admin.books.*")) active @endif" href="{{route("admin.books.index")}}"><i class="app-menu__icon fas fa-book"></i><span class="app-menu__label">{{__("Books")}}</span></a></li>
 
+        <!------------------------- Books -------------------------->
+        <li><a class="app-menu__item @if(request()->routeIs("admin.request-books.*")) active @endif" href="{{route("admin.request-books.index")}}"><i class="app-menu__icon fas fa-book"></i><span class="app-menu__label">{{__("Request Books")}}</span></a></li>
 
     </ul>
 </aside>

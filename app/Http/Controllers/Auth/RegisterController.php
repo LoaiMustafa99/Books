@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
+use App\Rules\BeforeTime;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -79,14 +80,18 @@ class RegisterController extends Controller
     }
 
     public function rules(){
-        return [
+        $rules = [
             "username" => ["required"],
             "full_name" => ["required"],
             "email" => ['required', "email"],
-            "birth_date" => ["required"],
             "password" => ['required'],
             "confirm_password" => ["required", "same:password"]
         ];
+        $yearBefore = (int)date("Y", time()) - 15;
+        $monthBefore = date("m", time());
+        $dayBefore = date("d", time());
+        $rules["birth_date"] = ["required", "date", new BeforeTime("{$yearBefore}-{$monthBefore}-$dayBefore")];
+        return $rules;
     }
 
     public function createUser(Request $request){

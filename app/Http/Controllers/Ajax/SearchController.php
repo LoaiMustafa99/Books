@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 class SearchController extends Controller
 {
     public function index(Request $request){
-        $books = Book::where("name", "like", "%" . $request->text . "%")->get();
+        $books = Book::where("approved", 1)->where("name", "like", "%" . $request->text . "%")->get();
         $data = [];
         foreach ($books as $index => $book){
             $data["books"][$index]['name'] = $book->name;

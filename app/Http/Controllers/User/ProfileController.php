@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers\User;
 
+use App\Helpers\Dialog\Web\Dialog;
+use App\Helpers\Dialog\Web\Types\SuccessMessage;
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Rules\BeforeTime;
+use App\Rules\HashMatching;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -15,15 +19,18 @@ class ProfileController extends Controller
         $rules = [
             "username" => ["required"],
             "full_name" => ["required"],
-            "email" => ['required', "email"],
             "birth_date" => ["required"]
         ];
 
         if($request->password){
+            $rules['old_password'] = ['required', new HashMatching(Auth::guard("reader")->user()->password)];
             $rules['password'] = ['required'];
             $rules['confirm_password'] = ["required", "same:password"];
         }
-
+        $yearBefore = (int)date("Y", time()) - 15;
+        $monthBefore = date("m", time());
+        $dayBefore = date("d", time());
+        $rules["birth_date"] = ["date", new BeforeTime("{$yearBefore}-{$monthBefore}-$dayBefore")];
         return $rules;
     }
 
@@ -41,7 +48,6 @@ class ProfileController extends Controller
         $user = User::find($request->id);
         $user->username = $request->username;
         $user->full_name = $request->full_name;
-        $user->email = $request->email;
         $user->birth_date = $request->birth_date;
 
         if($request->password){
@@ -52,6 +58,9 @@ class ProfileController extends Controller
             $user->removeAllFiles();
             $user->saveMedia($request->file("image"), "profile_photo");
         }
+        $message = (new SuccessMessage())->title("Update Successfully")
+            ->body("The Profile information Has Been Update Successfully");
+        Dialog::flashing($message);
         return redirect()->route("reader.profile.index");
     }
 }

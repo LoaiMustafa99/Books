@@ -66,7 +66,7 @@
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label for="exampleSelect1">{{__("Main Category")}}</label>
-                                    <select class="form-control" id="mainCategory" name="main_category" data-url="{{route("admin.sub_categories.by_main_category")}}">
+                                    <select class="form-control" id="mainCategory" name="main_category" data-url="{{route("sub_categories.by_main_category")}}">
                                         <option value="">{{__("none")}}</option>
                                         @foreach($categories as $category)
                                             <option value="{{$category->id}}" >{{$category->name}}</option>
@@ -80,7 +80,7 @@
                             <div class="col-lg-6" id="subCategoriesBox" style="@if(!$errors->has('sub_category')) display: none @endif">
                                 <div class="form-group">
                                     <label for="exampleSelect1">{{__("Sub Category")}}</label>
-                                    <select class="form-control"  data-url="{{route("admin.sub_categories.by_sub_category")}}" id="SubCategories" name="category_id" >
+                                    <select class="form-control"  data-url="{{route("sub_categories.by_sub_category")}}" id="SubCategories" name="category_id" >
                                     </select>
                                 </div>
                                 @error("category_id")

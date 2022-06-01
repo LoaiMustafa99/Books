@@ -9,8 +9,8 @@ use Illuminate\Http\Request;
 class RatingController extends Controller
 {
     public function index(){
-        $data['books'] = Book::join("rating", "rating.book_id", "=","book.id")->orderBy("rating.number_rating", "desc")->get("book.*");
-//        dd($data);
+        $data['books'] = Book::join("rating", "rating.book_id", "=","book.id")->orderBy("rating.number_rating", "desc")->distinct()->get("book.*");
+
         return view("user.ratings.index", $data);
     }
 }

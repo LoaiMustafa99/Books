@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light" style="direction: ltr; background-color:#546a7b !important;">
-    <a class="navbar-brand" href="#" style="color:blanchedalmond!important;"><span style="color:#fff"> opinion</span> top</a>
+    <a class="navbar-brand" href="#" style="color:blanchedalmond!important;">@if(\Illuminate\Support\Facades\Auth::guard("reader")->check()) {{\Illuminate\Support\Facades\Auth::guard("reader")->user()->username}}  @else <span style="color:#fff"> Opinion</span> top  @endif </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -13,9 +13,15 @@
                 <a class="nav-link col-item" href="#">Contact</a>
             </li>
             @if(\Illuminate\Support\Facades\Auth::guard("reader")->check())
-            <li class="nav-item">
-                <a class="nav-link col-item" href="{{route("post.create")}}">Add Post</a>
-            </li>
+                <li class="nav-item">
+                    <a class="nav-link col-item" href="{{route("post.create")}}">Add Post</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link col-item" href="{{route("books.create")}}">Add Book</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link col-item" href="{{route("books.my-book")}}">My Book</a>
+                </li>
             @endif
         </ul>
         @if(!\Illuminate\Support\Facades\Auth::guard("reader")->check())
