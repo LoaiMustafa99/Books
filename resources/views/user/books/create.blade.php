@@ -6,7 +6,7 @@
 @section("content")
 
     <div class="container" style="margin-top:30px;">
-        <h1 style="text-align: center;margin-top: 50px;color: blanchedalmond;">Add new Book</h1>
+        <h1 style="text-align: center;margin-top: 50px;color: #cc984c;">Add new Book</h1>
         <hr style="width:30%">
         <form action="{{route("books.store")}}" method="post"  style="margin-top: 50px;" enctype="multipart/form-data">
             @csrf

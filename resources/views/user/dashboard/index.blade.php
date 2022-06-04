@@ -8,11 +8,6 @@
         <header id="header">
             <div class="inner">
 
-                <!-- Logo -->
-                <a href="index.html" class="logo safhat-index">
-                    <span class="symbol"></span><span class="title">Safahat</span>
-                </a>
-
             </div>
         </header>
         <!-- Main -->

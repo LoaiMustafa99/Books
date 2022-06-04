@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 02, 2022 at 12:16 AM
+-- Generation Time: Jun 04, 2022 at 07:00 AM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.11
 
@@ -161,6 +161,13 @@ CREATE TABLE `comments` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `comments`
+--
+
+INSERT INTO `comments` (`id`, `text`, `user_id`, `post_id`, `created_at`, `updated_at`) VALUES
+(12, 'rterter', 2, 10, '2022-06-02 14:57:13', '2022-06-02 14:57:13');
+
 -- --------------------------------------------------------
 
 --
@@ -202,7 +209,8 @@ INSERT INTO `media` (`id`, `filename`, `path`, `group`, `media_type`, `type_id`,
 (3, '16528151921475524391740.jpg', 'uploads/posts/3', 'main', 'App\\Models\\Post', 3, '2022-05-17 16:19:52', '2022-05-17 16:19:52'),
 (12, '16533231833294138552250.png', 'uploads/book/4', 'main', 'App\\Models\\Book', 4, '2022-05-23 13:26:23', '2022-05-23 13:26:23'),
 (15, '16536778072763727692775.jpg', 'uploads/book/5', 'main', 'App\\Models\\Book', 5, '2022-05-27 15:56:47', '2022-05-27 15:56:47'),
-(18, '1654119647292900006945.jpg', 'uploads/book/8', 'main', 'App\\Models\\Book', 8, '2022-06-01 18:40:47', '2022-06-01 18:40:47');
+(18, '1654119647292900006945.jpg', 'uploads/book/8', 'main', 'App\\Models\\Book', 8, '2022-06-01 18:40:47', '2022-06-01 18:40:47'),
+(20, '1654192627275616618830.jpg', 'uploads/posts/10', 'main', 'App\\Models\\Post', 10, '2022-06-02 14:57:07', '2022-06-02 14:57:07');
 
 -- --------------------------------------------------------
 
@@ -284,6 +292,13 @@ CREATE TABLE `posts` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `posts`
+--
+
+INSERT INTO `posts` (`id`, `description`, `user_id`, `created_at`, `updated_at`) VALUES
+(10, 'Test TEST TEST Test TEST TEST Test TEST TEST Test TEST TEST Test TEST TEST Test TEST TEST', 2, '2022-06-02 14:57:07', '2022-06-02 14:57:07');
+
 -- --------------------------------------------------------
 
 --
@@ -363,7 +378,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `full_name`, `username`, `email`, `email_verified_at`, `password`, `birth_date`, `remember_token`, `created_at`, `updated_at`) VALUES
-(2, 'Eman2', 'Eman2', 'Eman@gmail.com', NULL, '$2y$10$i6lNP5qu/f15ilBr.3lqme2bqwKYSbpfQDWmhQ0CUxiy/1D4yTvq.', '1999-04-09', NULL, '2022-03-29 18:43:52', '2022-06-01 18:43:19'),
+(2, 'Eman2', 'Eman2', 'Eman@gmail.com', NULL, '$2y$10$w.d6CTPHYzyOgXTykPy8oOZ6KLizm1aE1RnrymziLMv/3a8AJ9BsG', '1999-04-09', NULL, '2022-03-29 18:43:52', '2022-06-02 13:47:38'),
 (3, 'User', 'User1', 'User@gmail.com', NULL, '$2y$10$xVpA69XPdTl916.JnlFgsuoL6sfDsbpGcaplRWkyPG1W/xvDYTqb.', '1999-01-24', NULL, '2022-05-24 14:35:31', '2022-05-24 14:35:31'),
 (4, 'User1', 'User1', 'User1@gmail.com', NULL, '$2y$10$mOREdxc83eRLptxs8W.dKulsfhEZDttrosayw/lphjHXO6nz/Ffie', '1999-02-02', NULL, '2022-06-01 18:46:45', '2022-06-01 18:46:45');
 
@@ -492,19 +507,19 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `book`
 --
 ALTER TABLE `book`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `book_comments`
 --
 ALTER TABLE `book_comments`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `book_favorites`
 --
 ALTER TABLE `book_favorites`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `category`
@@ -516,7 +531,7 @@ ALTER TABLE `category`
 -- AUTO_INCREMENT for table `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
@@ -528,7 +543,7 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `media`
 --
 ALTER TABLE `media`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `migrations`
@@ -546,13 +561,13 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT for table `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `rating`
 --
 ALTER TABLE `rating`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `sub_categories`
