@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 04, 2022 at 07:00 AM
+-- Generation Time: Jun 04, 2022 at 05:59 PM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.11
 
@@ -44,7 +44,7 @@ CREATE TABLE `admin` (
 --
 
 INSERT INTO `admin` (`id`, `full_name`, `username`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'Eman', 'eman', 'eman@gmail.com', NULL, '$2y$10$ZIMNOpLHJJMOFYX/vjAajO3/rBOxvIrAUCLYd1quwAGJmhC8M4BiS', NULL, '2022-04-09 19:30:47', '2022-04-09 19:30:47');
+(1, 'Eman', 'eman', 'eman@gmail.com', NULL, '$2y$10$g3xUqxTDPDAxtdqPt9UzSuA7SqiLCL8/8A.BWrbZOXUK00sB6932i', NULL, '2022-04-09 19:30:47', '2022-06-04 12:23:57');
 
 -- --------------------------------------------------------
 
@@ -71,9 +71,7 @@ CREATE TABLE `book` (
 --
 
 INSERT INTO `book` (`id`, `name`, `description`, `age_from`, `age_to`, `publishing_year`, `category_id`, `user_id`, `approved`, `created_at`, `updated_at`) VALUES
-(4, 'The Atlas Six by Olivie Blake', 'Why You’ll Love It: After becoming a BookTok sensation in the summer of 2021, The Atlas Six is getting a newly revised hardcover rerelease to hype everyone up for the arrival of its sequel The Atlas Paradox later this year. And if you missed the memo on this story the first time now is your chance to catch up. Blake’s novel has a little bit of everything: dark academia vibes, hot magicians, secret societies, a twisty plot, and an array of diverse, intriguing characters at its center. Get in on it now before the already commissioned Amazon series arrives. \r\nPublisher’s Description: The Alexandrian Society is a secret society of magical academicians, the best in the world. Their members are caretakers of lost knowledge from the greatest civilizations of antiquity. And those who earn a place among their number will secure a life of wealth, power, and prestige beyond their wildest dreams. Each decade, the world’s six most uniquely talented magicians are selected for initiation – and here are the chosen few…\r\n- Libby Rhodes and Nicolás Ferrer de Varona: inseparable enemies, cosmologists who can control matter with their minds.\r\n- Reina Mori: a naturalist who can speak the language of life itself.\r\n- Parisa Kamali: a mind reader whose powers of seduction are unmatched.\r\n- Tristan Caine: the son of a crime kingpin who can see the secrets of the universe.\r\n- Callum Nova: an insanely rich pretty boy who could bring about the end of the world. He need only ask.\r\nWhen the candidates are recruited by the mysterious Atlas Blakely, they are told they must spend one year together to qualify for initiation. During this time, they will be permitted access to the Society’s archives and judged on their contributions to arcane areas of knowledge. Five, they are told, will be initiated. One will be eliminated. If they can prove themselves to be the best, they will survive. Most of them.', 10, 25, '2021-01-23', 21, NULL, 1, '2022-05-23 13:26:23', '2022-05-23 13:26:23'),
-(5, 'Gallant by V.E. Schwab', 'Why You’ll Love It: V.E. Schwab’s haunting new young adult fantasy about a young girl’s search for the home she’s always wanted is a lush, diamond-sharp bit of horror writing, with beautiful visuals, incredible worldbuilding, and a charmingly offbeat found family at its core. The incorporation of different forms of communication—Olivia speaks to others in sign language and the writings and drawings left behind in a journal are all she has left of either of her parents—is incredibly creative, and the spooky, shadow-filled setting is impeccably rendered throughout.\r\nPublisher’s Description: Olivia Prior has grown up in Merilance School for girls, and all she has of her past is her mother’s journal—which seems to unravel into madness. Then, a letter invites Olivia to come home—to Gallant. Yet when Olivia arrives, no one is expecting her. But Olivia is not about to leave the first place that feels like home, it doesn’t matter if her cousin Matthew is hostile or if she sees half-formed ghouls haunting the hallways.\r\nOlivia knows that Gallant is hiding secrets, and she is determined to uncover them. When she crosses a ruined wall at just the right moment, Olivia finds herself in a place that is Gallant—but not. The manor is crumbling, the ghouls are solid, and a mysterious figure rules over all. Now Olivia sees what has unraveled generations of her family, and where her father may have come from.', 15, 35, '2020-05-27', 21, NULL, 1, '2022-05-27 15:56:47', '2022-05-27 15:56:47'),
-(8, 'Head phone1', 'mxc jnkxcnb kjc bjnxc', 10, 60, '2016-01-02', 21, 2, 1, '2022-06-01 18:40:47', '2022-06-01 18:41:47');
+(10, 'Gallant by V.E. Schwab', 'Why You’ll Love It: V.E. Schwab’s haunting new young adult fantasy about a young girl’s search for the home she’s always wanted is a lush, diamond-sharp bit of horror writing, with beautiful visuals, incredible worldbuilding, and a charmingly offbeat found family at its core. The incorporation of different forms of communication—Olivia speaks to others in sign language and the writings and drawings left behind in a journal are all she has left of either of her parents—is incredibly creative, and the spooky, shadow-filled setting is impeccably rendered throughout.\r\nPublisher’s Description: Olivia Prior has grown up in Merilance School for girls, and all she has of her past is her mother’s journal—which seems to unravel into madness. Then, a letter invites Olivia to come home—to Gallant. Yet when Olivia arrives, no one is expecting her. But Olivia is not about to leave the first place that feels like home, it doesn’t matter if her cousin Matthew is hostile or if she sees half-formed ghouls haunting the hallways.\r\nOlivia knows that Gallant is hiding secrets, and she is determined to uncover them. When she crosses a ruined wall at just the right moment, Olivia finds herself in a place that is Gallant—but not. The manor is crumbling, the ghouls are solid, and a mysterious figure rules over all. Now Olivia sees what has unraveled generations of her family, and where her father may have come from.', 15, 25, '2009-01-04', 28, 2, 0, '2022-06-04 12:55:54', '2022-06-04 12:55:54');
 
 -- --------------------------------------------------------
 
@@ -90,16 +88,6 @@ CREATE TABLE `book_comments` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `book_comments`
---
-
-INSERT INTO `book_comments` (`id`, `text`, `user_id`, `book_id`, `created_at`, `updated_at`) VALUES
-(19, 'erterger', 4, 8, '2022-06-01 19:00:53', '2022-06-01 19:00:53'),
-(20, 'drgred', 4, 5, '2022-06-01 19:01:21', '2022-06-01 19:01:21'),
-(21, 'rgerge', 4, 4, '2022-06-01 19:01:31', '2022-06-01 19:01:31'),
-(22, 'ererger', 2, 8, '2022-06-01 19:02:08', '2022-06-01 19:02:08');
-
 -- --------------------------------------------------------
 
 --
@@ -113,13 +101,6 @@ CREATE TABLE `book_favorites` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `book_favorites`
---
-
-INSERT INTO `book_favorites` (`id`, `user_id`, `book_id`, `created_at`, `updated_at`) VALUES
-(7, 2, 4, '2022-05-29 18:36:50', '2022-05-29 18:36:50');
 
 -- --------------------------------------------------------
 
@@ -141,10 +122,7 @@ CREATE TABLE `category` (
 --
 
 INSERT INTO `category` (`id`, `name`, `limit_levels_of_sub_categories`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'Ram 17GBtrhrft', 2, 1, '2022-03-12 21:56:47', '2022-05-23 12:23:10'),
-(2, 'Eman', 1, 0, '2022-03-18 14:33:44', '2022-03-18 14:33:44'),
-(4, 'Read Book', 1, 0, '2022-03-18 14:35:13', '2022-04-11 18:52:41'),
-(10, 'Art', 2, 1, '2022-05-23 18:23:42', '2022-05-23 18:25:12');
+(11, 'novel', 1, 1, '2022-06-04 12:51:44', '2022-06-04 12:51:56');
 
 -- --------------------------------------------------------
 
@@ -210,7 +188,8 @@ INSERT INTO `media` (`id`, `filename`, `path`, `group`, `media_type`, `type_id`,
 (12, '16533231833294138552250.png', 'uploads/book/4', 'main', 'App\\Models\\Book', 4, '2022-05-23 13:26:23', '2022-05-23 13:26:23'),
 (15, '16536778072763727692775.jpg', 'uploads/book/5', 'main', 'App\\Models\\Book', 5, '2022-05-27 15:56:47', '2022-05-27 15:56:47'),
 (18, '1654119647292900006945.jpg', 'uploads/book/8', 'main', 'App\\Models\\Book', 8, '2022-06-01 18:40:47', '2022-06-01 18:40:47'),
-(20, '1654192627275616618830.jpg', 'uploads/posts/10', 'main', 'App\\Models\\Post', 10, '2022-06-02 14:57:07', '2022-06-02 14:57:07');
+(20, '1654192627275616618830.jpg', 'uploads/posts/10', 'main', 'App\\Models\\Post', 10, '2022-06-02 14:57:07', '2022-06-02 14:57:07'),
+(21, '1654358154939181018510.jpg', 'uploads/book/10', 'main', 'App\\Models\\Book', 10, '2022-06-04 12:55:54', '2022-06-04 12:55:54');
 
 -- --------------------------------------------------------
 
@@ -314,17 +293,6 @@ CREATE TABLE `rating` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `rating`
---
-
-INSERT INTO `rating` (`id`, `user_id`, `book_id`, `number_rating`, `created_at`, `updated_at`) VALUES
-(2, 2, 4, 5, '2022-05-27 08:25:17', '2022-05-27 15:26:42'),
-(3, 2, 5, 2, '2022-05-27 15:58:54', '2022-05-29 18:36:27'),
-(4, 2, 8, 4, '2022-06-01 18:42:19', '2022-06-01 18:42:19'),
-(5, 4, 8, 3, '2022-06-01 18:47:17', '2022-06-01 18:47:17'),
-(6, 4, 4, 1, '2022-06-01 19:00:04', '2022-06-01 19:00:04');
-
 -- --------------------------------------------------------
 
 --
@@ -346,13 +314,10 @@ CREATE TABLE `sub_categories` (
 --
 
 INSERT INTO `sub_categories` (`id`, `name`, `main_id`, `level`, `parent_id`, `created_at`, `updated_at`) VALUES
-(20, 'Test', 1, 1, NULL, '2022-05-23 12:23:03', '2022-05-23 16:30:23'),
-(21, 'Eman', 1, 2, 20, '2022-05-23 12:23:10', '2022-05-29 18:40:31'),
-(22, 'Ram 17GB', 1, 2, 20, '2022-05-23 18:03:56', '2022-05-23 18:03:56'),
-(23, 'Malle', 1, 2, 20, '2022-05-23 18:04:01', '2022-05-23 18:04:01'),
-(24, 'رعب', 10, 1, NULL, '2022-05-23 18:24:07', '2022-05-23 18:24:07'),
-(25, 'درامى', 10, 1, NULL, '2022-05-23 18:24:30', '2022-05-23 18:24:45'),
-(26, 'دراما', 10, 2, 24, '2022-05-23 18:25:11', '2022-05-23 18:25:34');
+(28, 'horror', 11, 1, NULL, '2022-06-04 12:51:56', '2022-06-04 12:51:56'),
+(29, 'romantic', 11, 1, NULL, '2022-06-04 12:52:09', '2022-06-04 12:52:09'),
+(30, 'History', 11, 1, NULL, '2022-06-04 12:52:19', '2022-06-04 12:52:19'),
+(31, 'Science', 11, 1, NULL, '2022-06-04 12:52:29', '2022-06-04 12:52:29');
 
 -- --------------------------------------------------------
 
@@ -507,7 +472,7 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `book`
 --
 ALTER TABLE `book`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `book_comments`
@@ -525,7 +490,7 @@ ALTER TABLE `book_favorites`
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `comments`
@@ -543,7 +508,7 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `media`
 --
 ALTER TABLE `media`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `migrations`
@@ -573,7 +538,7 @@ ALTER TABLE `rating`
 -- AUTO_INCREMENT for table `sub_categories`
 --
 ALTER TABLE `sub_categories`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT for table `users`
