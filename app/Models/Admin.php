@@ -2,15 +2,24 @@
 
 namespace App\Models;
 
+use App\Helpers\Media\Src\IMedia;
+use App\Helpers\Media\Src\MediaDefaultPhotos;
+use App\Helpers\Media\Src\MediaInitialization;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class Admin extends Authenticatable
+class Admin extends Authenticatable implements IMedia
 {
-    use Notifiable;
+    use Notifiable, MediaInitialization, MediaDefaultPhotos;
 
     protected $table = "admin";
     protected $guard = 'admin';
+
+    public function setMainDirectoryPath(): string
+    {
+        return "admin";
+    }
+
 
     /**
      * The attributes that are mass assignable.

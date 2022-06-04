@@ -88,6 +88,12 @@ Route::group(['middleware' => 'auth:admin'], function () {
             Route::get("/","Admin\RequestBookController@index")->name("index");
             Route::post("/{id}", "Admin\RequestBookController@action")->name("action");
         });
+
+        Route::prefix("profile")->name("profile.")->group(function(){
+            Route::get("/", "Admin\ProfileController@index")->name("index");
+            Route::post("/","Admin\ProfileController@update")->name("update");
+            Route::post("/change-password", "Admin\ProfileController@ChangePassword")->name("ChangePassword");
+        });
     });
 });
 

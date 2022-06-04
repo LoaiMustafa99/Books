@@ -6,11 +6,11 @@
     </a>
     <div class="app-sidebar__user">
         <div class="avatar-box">
-            <img class="app-sidebar__user-avatar" src="#" alt="">
+            <img class="app-sidebar__user-avatar" src="{{request()->user()->defaultUserPhoto()}}" alt="">
         </div>
         <div>
 
-            <p class="app-sidebar__user-name">Eman</p>
+            <p class="app-sidebar__user-name">{{\Illuminate\Support\Facades\Auth::user()->username}}</p>
             <p class="app-sidebar__user-name" style="font-size: 14px; color: #f2f2f2">{{__("Admin")}}</p>
         </div>
     </div>
