@@ -1,35 +1,24 @@
-@extends('layouts.user_auth.app')
+@extends('layouts.auth.app')
 
 @section('content')
-
-    @isset($url)
-        <form method="post" class="login-form" action='{{ url("login/$url") }}'>
-    @else
-        <form class="login-form"  method="post" action="{{ route('login') }}">
-    @endisset
-                @csrf
-            <div class="cont">
-                <div class="form sign-in">
-                    <h2>sign in</h2>
-                    <label>
-                        <span>Email</span>
-                        <input type="email" name="email" />
-                    </label>
-                    <label>
-                        <span>password</span>
-                        <input type="password" name="password" />
-                    </label>
-                    <button type="submit" class="submit">sign in</button>
-                </div>
-                <div class="sub-cont">
-                    <div class="img">
-                        <div class="img__text">
-                            <h2 class="logo-opinion"><span>Your Opinion on</span> the top</h2>
-                            <p>If you do not have an account</p>
-                            <a href="{{route("register.user")}}" class="sign-btn">sign up</a>
-                        </div>
-                    </div>
-                 </div>
+    <div class="video-wrap" style="height:100vh;">
+        @isset($url)
+        <form method="post" class="login-form" style="width:500px;top:50%;" action='{{ url("login/$url") }}'>
+                @else
+        <form class="login-form" style="width:500px;top:50%;" method="post" action="{{ route('login') }}">
+        @endisset
+            @csrf
+            <h2>Login User</h2>
+            <div class="input-form">
+                <input type="email" name="email" placeholder="Email">
             </div>
+            <div class="input-form">
+                <input type="password" name="password" placeholder="Password">
+            </div>
+            <div class="input-form">
+                <input type="submit" name="login" value="تسجيل الدخول">
+            </div>
+            <span class="new-page"> ليس لدي حساب؟<a href="{{route("register.user")}}" style="">حساب جديد </a></span>
         </form>
+    </div>
 @endsection

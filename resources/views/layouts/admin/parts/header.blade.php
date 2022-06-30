@@ -26,14 +26,8 @@
  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;700;900&display=swap" rel="stylesheet">
 
 <!-- Main CSS-->
-<link rel="stylesheet" type="text/css" href="{{asset("assets/css/main.css")}}">
-
-
-<link rel="stylesheet" type="text/css" href="{{asset('assets/css/lib/all.min.css')}}">
-
- <link rel="stylesheet" type="text/css" href="{{asset("assets/css/master.css")}}">
-
-<link rel="stylesheet" type="text/css" href="{{asset('assets/css/' . app()->getLocale() . '/custom.css')}}">
+<link rel="stylesheet" type="text/css" href="{{asset("assets/css/bootstrap.min.css")}}">
+ <link rel="stylesheet" type="text/css" href="{{asset("assets/css/main.css")}}">
 
  <!-- Google fonts -->
  <link rel="preconnect" href="https://fonts.googleapis.com">

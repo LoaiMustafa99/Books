@@ -5,7 +5,7 @@
 @section("page-nav-title")
     <div class="header-page">
         <div>
-            Admin / Users
+            Admin / User Wallets
         </div>
     </div>
 @endsection
@@ -19,31 +19,21 @@
                     <table class="table table-bordered table-responsive-md table-striped text-center">
                         <thead>
                         <tr>
-                            <th>#</th>
                             <th>Name</th>
-                            <th>Email</th>
-                            <th>Phone Number</th>
-                            <th>Created At</th>
+                            <th>Total of income</th>
+                            <th>Total of expenses</th>
+                            <th>Wallet balance</th>
                         </tr>
                         </thead>
                         <tbody>
-                        @if(!empty($users))
-                            @foreach($users as $user)
+                            @foreach($wallets as $name => $wallet)
                                 <tr>
-                                    <td>{{$user->id}}</td>
-                                    <td>{{$user->name}}</td>
-                                    <td>{{$user->email}}</td>
-                                    <td>{{$user->phone_number}}</td>
-                                    <td>{{$user->created_at->diffForHumans()}}</td>
+                                    <td>{{$name}}</td>
+                                    <td>{{$wallet['total_of_income']}}</td>
+                                    <td>{{$wallet['total_of_expenses']}}</td>
+                                    <td>{{$wallet['wallet_balance']}}</td>
                                 </tr>
                             @endforeach
-                        @else
-                            <tr>
-                                <td colspan="8">
-                                    There are No Users
-                                </td>
-                            </tr>
-                        @endif
                         </tbody>
                     </table>
                 </div>

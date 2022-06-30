@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\ReferralLink;
+use App\Models\RegisterReferralLink;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use App\Rules\BeforeTime;
@@ -74,23 +76,31 @@ class RegisterController extends Controller
         ]);
     }
 
-    public function showRegisterForm()
+    public function showRegisterForm(Request $request)
     {
+        if(isset($request->link_id)){
+            $link_id = $request->link_id;
+            $this->addVisitorByLink($link_id);
+        }
         return view('auth.register');
+    }
+
+    public function addVisitorByLink($link_id){
+        $add = ReferralLink::find($link_id);
+        $add->number_of_visitors=$add->number_of_visitors+1;
+        $add->save();
     }
 
     public function rules(){
         $rules = [
-            "username" => ["required"],
-            "full_name" => ["required"],
-            "email" => ['required', "email"],
-            "password" => ['required'],
-            "confirm_password" => ["required", "same:password"]
+            "name" => ["required"],
+            "email" => ['required', "email", "unique:users"],
+            "password" => ['required',"min:8", "max:30"],
+            "confirm_password" => ["required", "same:password"],
+            "phone_number"     => ['required', "unique:users"],
+//            "user_image"       => ["required", "max:50240"]
         ];
-        $yearBefore = (int)date("Y", time()) - 15;
-        $monthBefore = date("m", time());
-        $dayBefore = date("d", time());
-        $rules["birth_date"] = ["required", "date", new BeforeTime("{$yearBefore}-{$monthBefore}-$dayBefore")];
+
         return $rules;
     }
 
@@ -100,13 +110,30 @@ class RegisterController extends Controller
             return redirect()->back()->withInput($request->all())->withErrors($valid->errors()->messages());
 
         $user = new User();
-        $user->username = $request->username;
-        $user->full_name = $request->full_name;
+        $user->name = $request->name;
+        $user->phone_number = $request->phone_number;
         $user->email = $request->email;
         $user->birth_date = $request->birth_date;
         $user->password = Hash::make($request->password);
+        $user->user_image = "sasd";
         $user->save();
+
+        if(isset($request->link_id)){
+            $this->addUserByLink($request->link_id, $user->id);
+        }
+
         return redirect()->route("user.login");
+    }
+
+    public function addUserByLink($linkId, $userId){
+        $register = new RegisterReferralLink();
+        $register->referral_link_id = $linkId;
+        $register->user_id = $userId;
+        if($register->save()) {
+            $link = ReferralLink::find($linkId);
+            $link->number_of_registered=$link->number_of_registered+1;
+            $link->save();
+        }
     }
 
 }

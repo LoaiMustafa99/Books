@@ -4,11 +4,13 @@
 @include("layouts.admin.parts.header")
 </head>
 <body class="app sidebar-mini rtl">
+<!-- Sidebar menu-->
+@include("layouts.admin.parts.slidebar")
+
+
 <!-- Navbar-->
 @include("layouts.admin.parts.navbar")
 
-<!-- Sidebar menu-->
-@include("layouts.admin.parts.slidebar")
 
 <main class="app-content">
     @hasSection("page-nav-title")

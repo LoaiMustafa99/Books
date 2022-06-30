@@ -76,7 +76,7 @@ class LoginController extends Controller
 //        ]);
 
         if (Auth::guard('reader')->attempt(['email' => $request->email, 'password' => $request->password], $request->get('remember'))) {
-            return redirect()->route("index");
+            return redirect()->route("reader.dashboard.index");
         }
         return back()->withInput($request->only('email', 'remember'));
     }

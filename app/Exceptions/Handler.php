@@ -59,7 +59,7 @@ class Handler extends ExceptionHandler
             return redirect()->guest('/admin/login');
         }
         if ($request->is('reader') || $request->is('reader/*')) {
-            return redirect()->guest('/user/login');
+            return redirect()->guest('/');
         }
         return parent::render($request, $exception);
     }

@@ -1,67 +1,52 @@
-@extends('layouts.user_auth.app')
+@extends('layouts.auth.app')
 
 @section('content')
 
-
-<form method="POST" action="{{ route('register.user.save') }}">
-    @csrf
-    <div class="cont" style="height: 771px;margin-bottom: 20px;">
-        <div class="form sign-in" style="padding: 0px 30px 0;margin: 1% !important;">
-            <h2>sign up</h2>
-            <label>
-                <span>Username</span>
-                <input type="text" name="username" />
-                @error("username")
+    <div class="video-wrap" style="height:100vh;">
+        <form class="login-form" style="width:500px;top:50%;" method="post" action="{{ route('register.user.save') }}">
+            @csrf
+            <h2>Register User</h2>
+            <div class="input-form">
+                <input type="text" name="name" placeholder="Name">
+                @error("name")
                 <div class="input-error">{{$message}}</div>
                 @enderror
-            </label>
-            <label>
-                <span>Full Name</span>
-                <input type="text" name="full_name" />
-                @error("full_name")
-                <div class="input-error">{{$message}}</div>
-                @enderror
-            </label>
-            <label>
-                <span>Email</span>
-                <input type="email" name="email" />
+            </div>
+            <div class="input-form">
+                <input type="email" name="email" placeholder="Email">
                 @error("email")
                 <div class="input-error">{{$message}}</div>
                 @enderror
-            </label>
-            <label>
-                <span>Birth Date</span>
-                <input type="date" name="birth_date" />
+            </div>
+            <input type="hidden" name="link_id" value="{{app('request')->input('link_id')}}">
+            <div class="input-form">
+                <input type="text" name="phone_number" placeholder="Phone Number">
+                @error("phone_number")
+                <div class="input-error">{{$message}}</div>
+                @enderror
+            </div>
+            <div class="input-form">
+                <input type="date" name="birth_date" placeholder="Birth Date">
                 @error("birth_date")
                 <div class="input-error">{{$message}}</div>
                 @enderror
-            </label>
-            <label>
-                <span>password</span>
-                <input type="password" name="password" />
+            </div>
+            <div class="input-form">
+                <input type="password" name="password" placeholder="Password">
                 @error("password")
                 <div class="input-error">{{$message}}</div>
                 @enderror
-            </label>
-            <label>
-                <span>confirm password</span>
-                <input type="password" name="confirm_password" />
+            </div>
+            <div class="input-form">
+                <input type="password" name="confirm_password" placeholder="Confirm Password">
                 @error("confirm_password")
                 <div class="input-error">{{$message}}</div>
                 @enderror
-            </label>
-            <button type="submit" class="submit">sign up</button>
-        </div>
-        <div class="sub-cont">
-            <div class="img">
-                <div class="img__text">
-                    <h2 class="logo-opinion"><span>Your Opinion on</span> the top</h2>
-                    <p>If you have an account</p>
-                    <a href="{{route("user.login")}}"class="sign-btn">sign in</a>
-                </div>
             </div>
-        </div>
+            <div class="input-form">
+                <input type="submit" value="Register">
+            </div>
+        </form>
     </div>
-</form>
 
 @endsection

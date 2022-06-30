@@ -1,38 +1,24 @@
-@extends('layouts.user_auth.app')
+@extends('layouts.auth.app')
 
 @section('content')
-    @if(count($errors) > 0 )
-        <div class="login-errors">
-            <ul >
-                @foreach($errors->all() as $key => $error)
-                    <li>{{$error}}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
-        @isset($url)
-            <form method="post" class="login-form" action='{{ url("login/$url") }}'>
-        @else
-            <form class="login-form"  method="post" action="{{ route('login') }}">
-        @endisset
-            @csrf
-                <div class="cont">
-                    <div class="form sign-in">
-                        <h2>sign in Admin</h2>
-                        <label>
-                            <span>Email</span>
-                            <input type="email" name="email" />
-                        </label>
-                        <label>
-                            <span>password</span>
-                            <input type="password" name="password" />
-                        </label>
-                        <button type="submit" class="submit">sign in</button>
-                    </div>
-                    <div class="sub-cont">
-                        <div class="img">
-                        </div>
-                    </div>
+        <div class="video-wrap" style="height:100vh;">
+            @isset($url)
+                <form method="post" class="login-form" style="width:500px;top:50%;" action='{{ url("login/$url") }}'>
+            @else
+                <form class="login-form" style="width:500px;top:50%;" method="post" action="{{ route('login') }}">
+            @endisset
+                    @csrf
+                    <h2>Login Admin</h2>
+                <div class="input-form">
+                    <input type="email" name="email" placeholder="Email">
                 </div>
+                <div class="input-form">
+                    <input type="password" name="password" placeholder="Password">
+                </div>
+                <div class="input-form">
+                    <input type="submit" name="login" value="تسجيل الدخول">
+                </div>
+{{--                <span class="new-page"> ليس لدي حساب؟<a href="signup.php" style="">حساب جديد </a></span>--}}
             </form>
+        </div>
 @endsection
